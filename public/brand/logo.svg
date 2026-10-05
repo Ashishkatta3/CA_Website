@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 64">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="64" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#0f3277"/><stop offset="1" stop-color="#06142f"/></linearGradient>
+    <radialGradient id="glow" cx="42" cy="22" r="26" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#3b82f6" stop-opacity=".45"/><stop offset="1" stop-color="#3b82f6" stop-opacity="0"/></radialGradient>
+    <linearGradient id="gold" x1="0" y1="9" x2="0" y2="50" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#ffe29a"/><stop offset="1" stop-color="#e59a2f"/></linearGradient>
+    <linearGradient id="bar" x1="0" y1="20" x2="0" y2="50" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#c7d6f5"/></linearGradient>
+    <linearGradient id="wave1" x1="0" y1="0" x2="64" y2="0" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#38bdf8"/><stop offset="1" stop-color="#2563eb"/></linearGradient>
+    <linearGradient id="wave2" x1="0" y1="0" x2="64" y2="0" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#1d4ed8"/><stop offset="1" stop-color="#1e3a8a"/></linearGradient>
+    <clipPath id="clip"><rect width="64" height="64" rx="15"/></clipPath>
+  </defs>
+  <g clip-path="url(#clip)">
+    <rect width="64" height="64" fill="url(#bg)"/>
+    <rect width="64" height="64" fill="url(#glow)"/>
+    <rect x="15.5" y="31" width="7" height="24" rx="2" fill="url(#bar)" opacity=".55"/>
+    <rect x="26.5" y="23.5" width="7" height="32" rx="2" fill="url(#bar)" opacity=".8"/>
+    <path d="M37.5 56V19.5h-3L41 9.5l6.5 10h-3V56z" fill="url(#gold)" stroke="url(#gold)" stroke-width="1" stroke-linejoin="round"/>
+    <path d="M-2 45c10-7.5 18-7 26-2.5S40 51 51 44s15-4 15-4v26H-2z" fill="url(#wave1)"/>
+    <path d="M-2 45c10-7.5 18-7 26-2.5S40 51 51 44s15-4 15-4" fill="none" stroke="#e0f2fe" stroke-width="1.2" stroke-linecap="round" opacity=".7"/>
+    <path d="M-2 52c9-5 16-4.5 24-1.5S38 57 49 51.5s17-3 17-3V66H-2z" fill="url(#wave2)"/>
+  </g>
+  <text x="80" y="33" font-family="-apple-system, 'SF Pro Display', Inter, 'Helvetica Neue', Arial, sans-serif" font-size="26" font-weight="600" fill="#1d1d1f" letter-spacing="-0.3">Sagar Reddy <tspan font-weight="400" fill="#86868b">&amp;</tspan> Co.</text>
+  <text x="81" y="52" font-family="-apple-system, 'SF Pro Text', Inter, 'Helvetica Neue', Arial, sans-serif" font-size="10" font-weight="500" fill="#6e6e73" letter-spacing="2.4">CHARTERED ACCOUNTANTS</text>
+</svg>
