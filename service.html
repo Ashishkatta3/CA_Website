@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Services — MSS Advisory Services, Chartered Accountants</title>
+  <meta name="description" content="Service details from MSS Advisory Services, Chartered Accountants, Guntur.">
+  <meta name="theme-color" content="#fafafc">
+  <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="services">
+<header id="site-header"></header>
+<div id="service-root"></div>
+<footer id="site-footer"></footer>
+
+<script src="js/data.js"></script>
+<script>
+// Renders one service from SITE.services, chosen by ?s=<id>
+(function () {
+  var S = SITE, icon = S.icon, esc = S.esc;
+  var id = new URLSearchParams(location.search).get("s");
+  var s = S.service(id);
+  if (!s) { location.replace("services.html"); return; }
+  document.title = s.name + " — MSS Advisory Services, Chartered Accountants";
+  document.querySelector('meta[name="description"]').setAttribute("content", s.summary);
+
+  var lnav = [["overview", "Overview"], ["included", "What's included"], ["process", "How it works"]];
+  if (s.faq.length) lnav.push(["faq", "FAQ"]);
+  var sm = "scroll-margin-top:100px";
+
+  document.getElementById("service-root").innerHTML =
+    '<nav class="lnav" aria-label="' + esc(s.name) + '"><div class="wrap lnav__inner"><p class="lnav__title">' + esc(s.name) + '</p><div class="lnav__right"><div class="lnav__links">' +
+      lnav.map(function (l) { return '<a href="#' + l[0] + '">' + l[1] + "</a>"; }).join("") +
+    '</div><a class="lnav__cta" href="contact.html?service=' + s.id + '">Enquire</a></div></div></nav>' +
+    "<main>" +
+    '<section id="overview" class="bg-white center" style="padding:64px 0 80px;' + sm + '"><div class="wrap reveal">' +
+      '<div style="display:flex;justify-content:center">' + S.appIcon(s) + "</div>" +
+      '<p class="t-eyebrow mt-8">' + esc(s.name) + '</p><h1 class="t-hero mt-2 pre">' + esc(s.tagline) + "</h1>" +
+      '<p class="t-intro mx-auto mt-6 max-2xl muted">' + esc(s.summary) + "</p>" +
+      '<div class="btn-row"><a class="btn btn--primary" href="contact.html?service=' + s.id + '">Request a consultation</a><a class="more" href="#included">See what\'s included' + icon("chevron") + "</a></div>" +
+    "</div></section>" +
+    '<section class="bg-canvas section"><div class="wrap"><h2 class="t-headline center reveal">Sound familiar?</h2>' +
+      '<ul class="grid-2 mt-12 max-4xl mx-auto">' + s.pains.map(function (p) { return '<li class="reveal"><div class="quote-card"><span>“</span><p>' + esc(p) + "</p></div></li>"; }).join("") + "</ul>" +
+      '<p class="center mt-10 muted">Ideal for: ' + esc(s.ideal) + "</p>" +
+    "</div></section>" +
+    '<section id="included" class="bg-white section" style="' + sm + '"><div class="wrap"><div class="reveal center"><h2 class="t-headline">What\'s included.</h2><p class="t-intro mx-auto mt-4 max-2xl muted">Choose one, or let us handle all of it.</p></div>' +
+      '<ul class="incl reveal">' + s.items.map(function (it) { return "<li>" + icon("check") + "<h3>" + esc(it[0]) + "</h3><p>" + esc(it[1]) + "</p></li>"; }).join("") + "</ul>" +
+    "</div></section>" +
+    '<section id="process" class="bg-black section" style="' + sm + '"><div class="wrap"><h2 class="t-headline center reveal">How it works.</h2>' +
+      '<ol class="steps-row no-scrollbar">' + S.steps.map(function (st, i) { return '<li><span class="num gradient-num">' + (i + 1) + "</span><h3>" + esc(st[0]) + "</h3><p>" + esc(st[1]) + "</p></li>"; }).join("") + "</ol>" +
+    "</div></section>" +
+    (s.faq.length ? '<section id="faq" class="bg-white section" style="' + sm + '"><div class="wrap"><h2 class="t-headline center reveal">Questions? Answers.</h2><div class="faq">' +
+      s.faq.map(function (f) { return "<details><summary>" + esc(f[0]) + icon("plus") + "</summary><p>" + esc(f[1]) + "</p></details>"; }).join("") + "</div></div></section>" : "") +
+    '<section class="bg-canvas section--sm"><div class="wrap"><h2 class="font-display" style="font-size:28px;font-weight:600">Explore other services.</h2>' +
+      '<ul class="mini-cards no-scrollbar">' + S.services.filter(function (o) { return o.id !== s.id; }).map(function (o) {
+        return '<li><a href="service.html?s=' + o.id + '">' + S.appIcon(o) + "<span>" + esc(o.name) + "</span></a></li>";
+      }).join("") + "</ul></div></section>" +
+    '<section class="bg-white section center"><div class="wrap reveal"><h2 class="t-headline">Ready when you are.</h2><p class="t-intro mx-auto mt-4 max-xl muted">Tell us a little about what you need help with.</p>' +
+      '<a class="btn btn--primary mt-8" href="contact.html?service=' + s.id + '">Request a consultation</a></div></section>' +
+    "</main>";
+})();
+</script>
+<script src="js/site.js"></script>
+</body>
+</html>

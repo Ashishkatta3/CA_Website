@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Knowledge Center — MSS Advisory Services, Chartered Accountants</title>
+  <meta name="description" content="Tax, GST and regulatory updates explained in plain language.">
+  <meta name="theme-color" content="#fafafc">
+  <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="resources">
+<header id="site-header"></header>
+
+<main class="bg-canvas" style="padding-bottom:96px" id="kc"></main>
+
+<footer id="site-footer"></footer>
+
+<script src="js/data.js"></script>
+<script src="js/articles.js"></script>
+<script src="js/site.js"></script>
+<script>
+(function () {
+  var S = SITE, esc = S.esc, icon = S.icon, A = ARTICLES, CATS = ARTICLE_CATS;
+  var root = document.getElementById("kc");
+  var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+  function fmt(d) { var x = new Date(d + "T00:00:00"); return x.getDate() + " " + months[x.getMonth()] + " " + x.getFullYear(); }
+  var params = new URLSearchParams(location.search);
+  var article = A.filter(function (a) { return a.id === params.get("a"); })[0];
+
+  if (article) {
+    document.title = article.title + " — MSS Advisory Services";
+    document.querySelector('meta[name="description"]').setAttribute("content", article.summary);
+    var related = A.filter(function (a) { return a.id !== article.id; }).slice(0, 3);
+    root.innerHTML =
+      '<article class="bg-white" style="padding:56px 0 80px"><div class="wrap max-3xl">' +
+        '<a class="more" href="knowledge.html" style="font-size:15px">‹ Knowledge Center</a>' +
+        '<p class="mt-8"><span class="tag tag--IT">' + CATS[article.cat] + '</span> <span class="muted" style="font-size:14px;margin-left:8px">' + fmt(article.date) + "</span></p>" +
+        '<h1 class="t-headline mt-4">' + esc(article.title) + "</h1>" +
+        '<p class="t-intro mt-4 muted">' + esc(article.summary) + "</p>" +
+        '<div class="prose mt-8">' + article.body + "</div>" +
+        '<p class="notice" style="margin:40px 0 0">This article is general information based on the law as we understand it on the date above. Rules change through notifications and amendments — please consult us before acting on it.</p>' +
+      "</div></article>" +
+      '<section class="section--sm"><div class="wrap"><h2 class="font-display" style="font-size:28px;font-weight:600">More updates.</h2><ul class="grid-3 mt-8">' +
+        related.map(card).join("") + "</ul>" +
+        '<div class="banner"><div><p>Have a question about this?</p><p class="mt-2 muted">Tell us your situation and we\'ll explain how it applies to you.</p></div><a class="btn btn--primary" href="contact.html" style="flex-shrink:0">Ask us</a></div>' +
+      "</div></section>";
+    return;
+  }
+
+  function card(a) {
+    return '<li><a class="article-card" href="knowledge.html?a=' + a.id + '"><span class="tag tag--IT">' + CATS[a.cat] + "</span><h3>" + esc(a.title) + "</h3><p>" + esc(a.summary) +
+      '</p><footer><span>' + fmt(a.date) + '</span><span class="more">Read' + icon("chevron") + "</span></footer></a></li>";
+  }
+
+  root.innerHTML =
+    '<section class="hero" style="padding-bottom:48px"><div class="wrap reveal"><p class="t-eyebrow">Knowledge Center</p><h1 class="t-hero">Updates, explained.</h1>' +
+    '<p class="t-intro">What changed, who it affects, and what to do about it.</p></div></section>' +
+    '<div class="wrap"><div class="filters mt-8" id="kc-filters" role="group" aria-label="Filter by category">' +
+      [["all", "All"]].concat(Object.keys(CATS).map(function (k) { return [k, CATS[k]]; })).map(function (c) {
+        return '<button type="button" data-c="' + c[0] + '">' + c[1] + "</button>";
+      }).join("") +
+    '</div><ul class="grid-3 mt-12" id="kc-list"></ul>' +
+    '<div class="banner"><div><p>Can\'t find what you\'re looking for?</p><p class="mt-2 muted">Ask us anything about tax, GST or compliance.</p></div><a class="btn btn--primary" href="contact.html" style="flex-shrink:0">Ask a question</a></div></div>';
+
+  var filters = document.getElementById("kc-filters"), list = document.getElementById("kc-list");
+  function render(c) {
+    filters.querySelectorAll("button").forEach(function (b) { var on = b.getAttribute("data-c") === c; b.classList.toggle("is-active", on); b.setAttribute("aria-pressed", on ? "true" : "false"); });
+    var items = A.filter(function (a) { return c === "all" || a.cat === c; });
+    list.innerHTML = items.map(card).join("") || '<li class="muted">No articles in this category yet.</li>';
+    if (history.replaceState) history.replaceState(null, "", c === "all" ? "knowledge.html" : "knowledge.html?c=" + c);
+  }
+  filters.addEventListener("click", function (e) { var b = e.target.closest("button"); if (b) render(b.getAttribute("data-c")); });
+  render(CATS[params.get("c")] ? params.get("c") : "all");
+})();
+</script>
+</body>
+</html>
