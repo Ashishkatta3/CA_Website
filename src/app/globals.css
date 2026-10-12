@@ -1,0 +1,109 @@
+@import "tailwindcss";
+
+/* Design tokens — the MSS Advisory Services palette: navy, cream and saffron
+   from the Trail Summit logo. */
+@theme {
+  --color-ink: #0d1b2a;
+  --color-ink-2: #4a5560;
+  --color-ink-3: #6b7580;
+  --color-canvas: #f5f1e8;
+  --color-line: #ddd5c6;
+  --color-accent: #0d1b2a;
+  --color-accent-hover: #1e3248;
+  --color-link: #9a5b0f;
+  --color-link-on-dark: #e8a33d;
+
+  /* Dark sections, cards on them, and their secondary text */
+  --color-night: #0d1b2a;
+  --color-night-2: #172a3e;
+  --color-mute-dark: #a9b3be;
+  --color-cream: #f2ede3;
+  --color-saffron: #e8a33d;
+  --color-saffron-soft: #fbf0dd;
+  /* Segmented controls and soft fills */
+  --color-pill: #ece6d9;
+  --color-pill-hover: #e2dacb;
+
+  --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", var(--font-inter), "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-brand: var(--font-archivo), "Helvetica Neue", Arial, sans-serif;
+  --font-display: -apple-system, BlinkMacSystemFont, "SF Pro Display", var(--font-inter), "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+  --ease-apple: cubic-bezier(0.28, 0.11, 0.32, 1);
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #fff;
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-size: 17px;
+  line-height: 1.47;
+  letter-spacing: -0.022em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Typography scale */
+@utility type-hero {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  line-height: 1.05;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+}
+@utility type-headline {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4.5vw, 3.5rem);
+  line-height: 1.07;
+  font-weight: 600;
+  letter-spacing: -0.005em;
+}
+@utility type-tile {
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 3.2vw, 2.5rem);
+  line-height: 1.1;
+  font-weight: 600;
+  letter-spacing: 0;
+}
+@utility type-eyebrow {
+  font-family: var(--font-display);
+  font-size: clamp(1.0625rem, 1.6vw, 1.3125rem);
+  line-height: 1.19;
+  font-weight: 600;
+  letter-spacing: 0.011em;
+}
+@utility type-intro {
+  font-family: var(--font-display);
+  font-size: clamp(1.1875rem, 2vw, 1.5rem);
+  line-height: 1.35;
+  font-weight: 400;
+  letter-spacing: 0.009em;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* Scroll-reveal (see components/Reveal.tsx) */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.9s var(--ease-apple), transform 0.9s var(--ease-apple);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+}
+
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { scrollbar-width: none; }
