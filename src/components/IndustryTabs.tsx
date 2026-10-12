@@ -76,7 +76,7 @@ export function IndustryTabs({ industries, syncHash = false }: { industries: Ind
           <ul className="space-y-3">
             {active.needs.map((n) => (
               <li key={n} className="flex items-start gap-3">
-                <span className="mt-0.5 grid size-5 shrink-0 place-items-center rounded-full bg-[#e8f2fd] text-accent">
+                <span className="mt-0.5 grid size-5 shrink-0 place-items-center rounded-full bg-saffron-soft text-accent">
                   <Icon name="check" className="size-3" strokeWidth={2.5} />
                 </span>
                 {n}

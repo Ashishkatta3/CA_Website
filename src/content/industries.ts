@@ -18,7 +18,7 @@ export const industries: Industry[] = [
     headline: "Build on solid ground.",
     description: "Get the structure, registrations and books right from day one, so you can focus on growth and be ready when investors ask.",
     needs: ["Business setup & structuring", "Company / LLP incorporation", "Tax & GST registration", "Accounting from day one", "Compliance calendar", "Financial projections"],
-    services: ["corporate", "registrations", "accounting", "gst", "advisory"],
+    services: ["registrations", "accounting", "gst", "advisory"],
   },
   {
     id: "smb",
@@ -26,7 +26,7 @@ export const industries: Industry[] = [
     icon: "store",
     headline: "Run the business. We'll run the compliance.",
     description: "Regular bookkeeping, GST, TDS and tax filings handled on schedule, with reports that show how you're really doing.",
-    needs: ["Bookkeeping", "GST returns & reconciliation", "TDS & payroll compliance", "Income tax", "Financial statements", "Tax audit"],
+    needs: ["Bookkeeping", "GST returns & reconciliation", "TDS compliance", "Income tax", "Financial statements", "Tax audit"],
     services: ["accounting", "gst", "tds", "income-tax", "audit"],
   },
   {
@@ -36,7 +36,7 @@ export const industries: Industry[] = [
     headline: "Assurance at scale.",
     description: "Audit, ROC compliance and advisory support for companies with more complex reporting and governance needs.",
     needs: ["Statutory & internal audit", "Corporate tax", "ROC / MCA compliance", "Internal control review", "Business advisory"],
-    services: ["audit", "income-tax", "corporate", "advisory"],
+    services: ["audit", "income-tax", "registrations", "advisory"],
   },
   {
     id: "individuals",

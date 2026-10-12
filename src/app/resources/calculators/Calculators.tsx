@@ -16,7 +16,7 @@ export function Calculators({ initialTab }: { initialTab: CalcTab }) {
 
   return (
     <>
-      <div role="tablist" aria-label="Calculators" className="mx-auto flex w-fit gap-1 rounded-full bg-[#e8e8ed] p-1">
+      <div role="tablist" aria-label="Calculators" className="mx-auto flex w-fit gap-1 rounded-full bg-pill p-1">
         {calculatorTabs.map((t) => (
           <button
             key={t.id}
@@ -46,7 +46,7 @@ function Panel({ inputs, results, note }: { inputs: ReactNode; results: ReactNod
     <div className="overflow-hidden rounded-[28px] bg-white">
       <div className="grid md:grid-cols-2">
         <div className="space-y-7 p-7 sm:p-10">{inputs}</div>
-        <div className="bg-black p-7 text-white sm:p-10">{results}</div>
+        <div className="bg-night p-7 text-white sm:p-10">{results}</div>
       </div>
       {note && <p className="border-t border-line/70 px-7 py-4 text-[12px] text-ink-2 sm:px-10">{note}</p>}
     </div>
@@ -93,7 +93,7 @@ function Toggle({ checked, onChange, label }: { checked: boolean; onChange: (b: 
         role="switch"
         aria-checked={checked}
         onClick={() => onChange(!checked)}
-        className={`relative h-[31px] w-[51px] shrink-0 rounded-full transition-colors ${checked ? "bg-[#34c759]" : "bg-[#e9e9eb]"}`}
+        className={`relative h-[31px] w-[51px] shrink-0 rounded-full transition-colors ${checked ? "bg-accent" : "bg-pill"}`}
       >
         <span className={`absolute top-[2px] left-[2px] size-[27px] rounded-full bg-white shadow transition-transform ${checked ? "translate-x-5" : ""}`} />
       </button>
@@ -104,7 +104,7 @@ function Toggle({ checked, onChange, label }: { checked: boolean; onChange: (b: 
 function Big({ label, value }: { label: string; value: string }) {
   return (
     <div>
-      <p className="text-[14px] text-[#a1a1a6]">{label}</p>
+      <p className="text-[14px] text-mute-dark">{label}</p>
       <p className="mt-1 font-display text-[44px] leading-none font-semibold tracking-tight sm:text-[52px]">{value}</p>
     </div>
   );
@@ -112,7 +112,7 @@ function Big({ label, value }: { label: string; value: string }) {
 
 function Row({ label, value, strong }: { label: string; value: string; strong?: boolean }) {
   return (
-    <div className={`flex justify-between gap-4 py-2.5 text-[15px] ${strong ? "font-semibold" : "text-[#d2d2d7]"}`}>
+    <div className={`flex justify-between gap-4 py-2.5 text-[15px] ${strong ? "font-semibold" : "text-cream/80"}`}>
       <span>{label}</span>
       <span className="tabular-nums">{value}</span>
     </div>
@@ -156,7 +156,7 @@ function IncomeTax() {
       results={
         <>
           <Big label="Estimated tax payable" value={inr(r.total)} />
-          <p className="mt-2 text-[14px] text-[#a1a1a6]">
+          <p className="mt-2 text-[14px] text-mute-dark">
             {income > 0 ? `About ${((r.total / income) * 100).toFixed(1)}% of gross income` : " "}
           </p>
           <div className="mt-8 divide-y divide-white/10">
@@ -285,12 +285,12 @@ function Emi() {
           {totalPaid > 0 && (
             <div className="mt-8">
               <div className="flex h-2.5 overflow-hidden rounded-full bg-white/10">
-                <div className="bg-[#2997ff]" style={{ width: `${(principal / totalPaid) * 100}%` }} />
-                <div className="bg-[#bf5af2]" style={{ flex: 1 }} />
+                <div className="bg-saffron" style={{ width: `${(principal / totalPaid) * 100}%` }} />
+                <div className="bg-[#7fa6c9]" style={{ flex: 1 }} />
               </div>
-              <div className="mt-3 flex gap-5 text-[12px] text-[#a1a1a6]">
-                <span className="flex items-center gap-1.5"><span className="size-2 rounded-full bg-[#2997ff]" />Principal</span>
-                <span className="flex items-center gap-1.5"><span className="size-2 rounded-full bg-[#bf5af2]" />Interest</span>
+              <div className="mt-3 flex gap-5 text-[12px] text-mute-dark">
+                <span className="flex items-center gap-1.5"><span className="size-2 rounded-full bg-saffron" />Principal</span>
+                <span className="flex items-center gap-1.5"><span className="size-2 rounded-full bg-[#7fa6c9]" />Interest</span>
               </div>
             </div>
           )}

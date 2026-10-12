@@ -18,8 +18,8 @@ export function Footer() {
         </div>
 
         <div className="flex items-center gap-3 pt-6">
-          <LogoMark className="size-9" />
-          <Wordmark caption className="text-[17px]" />
+          <LogoMark className="size-12" />
+          <Wordmark caption className="text-[22px]" />
         </div>
 
         <nav aria-label="Footer" className="grid grid-cols-2 gap-x-6 gap-y-6 py-5 sm:grid-cols-3 lg:grid-cols-5">

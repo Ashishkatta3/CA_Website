@@ -6,13 +6,13 @@ import { firm, nav, type NavItem } from "@/content/site";
 import { LogoMark, Wordmark } from "./Brand";
 import { Chevron } from "./ui";
 
-const glass = "bg-[rgba(250,250,252,0.86)] backdrop-blur-[20px] backdrop-saturate-[1.8]";
+const glass = "bg-[rgba(251,249,244,0.86)] backdrop-blur-[20px] backdrop-saturate-[1.8]";
 
 export function Logo({ className = "" }: { className?: string }) {
   return (
     <Link href="/" aria-label={`${firm.name} — Home`} className={`flex shrink-0 items-center gap-2 ${className}`}>
-      <LogoMark className="size-[26px]" />
-      <Wordmark className="text-[14px]" />
+      <LogoMark className="size-[30px]" detail="compact" />
+      <Wordmark className="text-[17px]" />
     </Link>
   );
 }
@@ -128,7 +128,7 @@ export function GlobalNav() {
       />
 
       {/* Mobile menu */}
-      <div className={`fixed inset-x-0 top-12 bottom-0 z-10 overflow-y-auto bg-[#fafafc] transition-opacity duration-300 md:hidden ${mobileOpen ? "opacity-100" : "pointer-events-none invisible opacity-0"}`}>
+      <div className={`fixed inset-x-0 top-12 bottom-0 z-10 overflow-y-auto bg-[#fbf9f4] transition-opacity duration-300 md:hidden ${mobileOpen ? "opacity-100" : "pointer-events-none invisible opacity-0"}`}>
         <ul className="px-10 pt-6 pb-16">
           {nav.map((item) => (
             <li key={item.label} className="border-b border-transparent">

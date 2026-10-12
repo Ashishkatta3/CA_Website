@@ -11,11 +11,10 @@ export const clientTypes = [
 export const needOptions = [
   { id: "income-tax", label: "Income Tax" },
   { id: "gst", label: "GST" },
-  { id: "accounting", label: "Accounting" },
-  { id: "audit", label: "Audit" },
-  { id: "tds", label: "TDS & Payroll" },
-  { id: "corporate", label: "Corporate Compliance" },
-  { id: "advisory", label: "Business Advisory" },
+  { id: "tds", label: "TDS" },
+  { id: "advisory", label: "Project Report / Loan" },
   { id: "registrations", label: "Registrations" },
+  { id: "accounting", label: "Accounting & Compliance" },
+  { id: "audit", label: "Audit" },
   { id: "other", label: "Other" },
 ];

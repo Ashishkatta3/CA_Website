@@ -6,7 +6,7 @@ import type { DueDate } from "@/content/important-dates";
 export const categoryColor: Record<DueDate["category"], string> = {
   GST: "text-[#00a37a] bg-[#e6f7f2]",
   TDS: "text-[#7a5af8] bg-[#f1edfe]",
-  "Income Tax": "text-accent bg-[#e8f2fd]",
+  "Income Tax": "text-accent bg-[#e6ecf2]",
   ROC: "text-[#c25e00] bg-[#fdf1e6]",
 };
 
@@ -32,7 +32,7 @@ export function UpcomingDates({ dates, limit = 4 }: { dates: DueDate[]; limit?: 
       {upcoming.map((d) => {
         const { day, month } = fmt(d.date);
         return (
-          <li key={d.date + d.title} className="flex items-center gap-4 py-4">
+          <li key={d.id} className="flex items-center gap-4 py-4">
             <div className="w-12 shrink-0 text-center">
               <div className="font-display text-[26px] leading-none font-semibold">{day}</div>
               <div className="text-[12px] tracking-wide text-ink-2 uppercase">{month}</div>

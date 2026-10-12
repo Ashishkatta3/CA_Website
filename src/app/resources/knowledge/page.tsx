@@ -29,7 +29,7 @@ export default async function KnowledgePage(props: PageProps<"/resources/knowled
       </section>
 
       <Container className="pt-12">
-        <nav aria-label="Categories" className="no-scrollbar mx-auto flex w-fit max-w-full gap-1 overflow-x-auto rounded-full bg-[#e8e8ed] p-1">
+        <nav aria-label="Categories" className="no-scrollbar mx-auto flex w-fit max-w-full gap-1 overflow-x-auto rounded-full bg-pill p-1">
           {categories.map((cat) => (
             <Link
               key={cat.id}

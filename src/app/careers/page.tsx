@@ -56,9 +56,9 @@ export default function CareersPage() {
             <p className="mt-4 text-ink-2">There are no open positions listed right now.</p>
           )}
 
-          <div className="mt-10 rounded-[22px] bg-black p-10 text-center text-white">
+          <div className="mt-10 rounded-[22px] bg-night p-10 text-center text-white">
             <p className="font-display text-[24px] font-semibold">Send us your CV.</p>
-            <p className="mt-2 text-[#a1a1a6]">Mention the role or area you&apos;re interested in.</p>
+            <p className="mt-2 text-mute-dark">Mention the role or area you&apos;re interested in.</p>
             <a href={`mailto:${firm.careersEmail}`} className="mt-6 inline-block rounded-full bg-accent px-6 py-3 transition-colors hover:bg-accent-hover">
               {firm.careersEmail}
             </a>

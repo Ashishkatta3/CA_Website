@@ -22,9 +22,9 @@ export default function ImportantDatesPage() {
       </section>
 
       <Container className="max-w-[860px] pt-12">
-        <p className="mb-10 rounded-[18px] bg-[#fff8e6] px-5 py-4 text-[14px] text-[#7a5a00]">
-          Due dates are indicative and may be extended or changed by notification. Last reviewed {reviewed}. Please confirm applicable dates with us
-          or on the official portals before relying on them.
+        <p className="mb-10 rounded-[18px] bg-saffron-soft px-5 py-4 text-[14px] text-[#7a4a08]">
+          Checked daily against official government sources (incometax.gov.in, gst.gov.in, mca.gov.in); last checked {reviewed}. Each date links to its
+          source. Dates can change by notification, so please confirm with us before relying on them.
         </p>
         <DatesBrowser dates={importantDates} />
         <div className="mt-16 text-center">

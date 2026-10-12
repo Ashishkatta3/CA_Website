@@ -8,7 +8,7 @@ import { services } from "@/content/services";
 
 export const metadata: Metadata = {
   title: "Services",
-  description: "Income tax, GST, accounting, audit, TDS, corporate compliance and business advisory services.",
+  description: "Income tax, GST, TDS, project reports and loan advisory, business registrations, accounting and audit services.",
 };
 
 export default function ServicesPage() {

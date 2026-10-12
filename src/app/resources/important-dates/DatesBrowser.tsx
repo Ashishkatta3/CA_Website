@@ -18,7 +18,7 @@ export function DatesBrowser({ dates }: { dates: DueDate[] }) {
 
   return (
     <>
-      <div role="group" aria-label="Filter by category" className="no-scrollbar mx-auto flex w-fit max-w-full gap-1 overflow-x-auto rounded-full bg-[#e8e8ed] p-1">
+      <div role="group" aria-label="Filter by category" className="no-scrollbar mx-auto flex w-fit max-w-full gap-1 overflow-x-auto rounded-full bg-pill p-1">
         {filters.map((f) => (
           <button
             key={f}
@@ -40,14 +40,22 @@ export function DatesBrowser({ dates }: { dates: DueDate[] }) {
               {items.map((d) => {
                 const date = new Date(`${d.date}T00:00:00`);
                 return (
-                  <li key={d.date + d.title} className="flex items-center gap-5 p-5 sm:px-7">
+                  <li key={d.id} className="flex items-center gap-5 p-5 sm:px-7">
                     <div className="w-12 shrink-0 text-center">
                       <div className="font-display text-[28px] leading-none font-semibold">{date.getDate()}</div>
                       <div className="text-[12px] text-ink-2 uppercase">{date.toLocaleString("en-IN", { weekday: "short" })}</div>
                     </div>
                     <div className="min-w-0 flex-1">
-                      <p className="text-[16px] leading-snug">{d.title}</p>
+                      <p className="text-[16px] leading-snug">
+                        {d.title}
+                        {d.extendedFrom && (
+                          <span className="ml-2 inline-block rounded-full bg-saffron-soft px-2 py-0.5 align-middle text-[11px] font-semibold text-[#7a4a08]">Extended</span>
+                        )}
+                      </p>
                       {d.note && <p className="mt-0.5 text-[13px] text-ink-2">{d.note}</p>}
+                      <a href={d.source.url} target="_blank" rel="noopener noreferrer" className="mt-1 inline-block text-[12px] text-ink-3 underline-offset-2 hover:text-ink hover:underline">
+                        Source: {d.source.label} ↗
+                      </a>
                     </div>
                     <span className={`hidden shrink-0 rounded-full px-2.5 py-1 text-[12px] font-semibold sm:inline ${categoryColor[d.category]}`}>{d.category}</span>
                   </li>

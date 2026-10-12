@@ -8,7 +8,7 @@ export function Button({ variant = "primary", size = "md", className = "", ...pr
   const variants = {
     primary: "bg-accent text-white hover:bg-accent-hover",
     secondary: "border border-accent text-accent hover:bg-accent hover:text-white",
-    "on-dark": "border border-link-on-dark text-link-on-dark hover:bg-link-on-dark hover:text-black",
+    "on-dark": "border border-link-on-dark text-link-on-dark hover:bg-link-on-dark hover:text-night",
   };
   return (
     <Link
@@ -42,9 +42,9 @@ export function Container({ className = "", children }: { className?: string; ch
 export function SectionHeading({ eyebrow, title, intro, className = "", dark = false }: { eyebrow?: string; title: ReactNode; intro?: ReactNode; className?: string; dark?: boolean }) {
   return (
     <div className={`text-center ${className}`}>
-      {eyebrow && <p className={`type-eyebrow mb-2 ${dark ? "text-[#86868b]" : "text-ink-2"}`}>{eyebrow}</p>}
+      {eyebrow && <p className={`type-eyebrow mb-2 ${dark ? "text-mute-dark" : "text-ink-2"}`}>{eyebrow}</p>}
       <h2 className="type-headline whitespace-pre-line">{title}</h2>
-      {intro && <p className={`type-intro mx-auto mt-4 max-w-2xl ${dark ? "text-[#a1a1a6]" : "text-ink-2"}`}>{intro}</p>}
+      {intro && <p className={`type-intro mx-auto mt-4 max-w-2xl ${dark ? "text-mute-dark" : "text-ink-2"}`}>{intro}</p>}
     </div>
   );
 }

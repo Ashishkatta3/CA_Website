@@ -27,7 +27,7 @@ export function CardCarousel({ children, label }: { children: ReactNode; label: 
             type="button"
             onClick={() => scroll(d)}
             aria-label={d < 0 ? "Previous" : "Next"}
-            className="grid size-9 place-items-center rounded-full bg-[#e8e8ed] text-ink/70 transition-colors hover:bg-[#dcdce1] hover:text-ink"
+            className="grid size-9 place-items-center rounded-full bg-pill text-ink/70 transition-colors hover:bg-pill-hover hover:text-ink"
           >
             <Chevron className={`size-3.5 ${d < 0 ? "rotate-180" : ""}`} />
           </button>

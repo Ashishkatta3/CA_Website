@@ -1,18 +1,31 @@
 @import "tailwindcss";
 
-/* Design tokens — modelled on Apple's marketing-site palette. */
+/* Design tokens — the MSS Advisory Services palette: navy, cream and saffron
+   from the Trail Summit logo. */
 @theme {
-  --color-ink: #1d1d1f;
-  --color-ink-2: #6e6e73;
-  --color-ink-3: #86868b;
-  --color-canvas: #f5f5f7;
-  --color-line: #d2d2d7;
-  --color-accent: #0071e3;
-  --color-accent-hover: #0077ed;
-  --color-link: #0066cc;
-  --color-link-on-dark: #2997ff;
+  --color-ink: #0d1b2a;
+  --color-ink-2: #4a5560;
+  --color-ink-3: #6b7580;
+  --color-canvas: #f5f1e8;
+  --color-line: #ddd5c6;
+  --color-accent: #0d1b2a;
+  --color-accent-hover: #1e3248;
+  --color-link: #9a5b0f;
+  --color-link-on-dark: #e8a33d;
+
+  /* Dark sections, cards on them, and their secondary text */
+  --color-night: #0d1b2a;
+  --color-night-2: #172a3e;
+  --color-mute-dark: #a9b3be;
+  --color-cream: #f2ede3;
+  --color-saffron: #e8a33d;
+  --color-saffron-soft: #fbf0dd;
+  /* Segmented controls and soft fills */
+  --color-pill: #ece6d9;
+  --color-pill-hover: #e2dacb;
 
   --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", var(--font-inter), "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-brand: var(--font-archivo), "Helvetica Neue", Arial, sans-serif;
   --font-display: -apple-system, BlinkMacSystemFont, "SF Pro Display", var(--font-inter), "Helvetica Neue", Helvetica, Arial, sans-serif;
 
   --ease-apple: cubic-bezier(0.28, 0.11, 0.32, 1);

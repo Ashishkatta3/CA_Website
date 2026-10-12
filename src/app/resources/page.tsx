@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 };
 
 const hubs: { icon: IconName; title: string; text: string; href: string; tone: string }[] = [
-  { icon: "calendar", title: "Important Dates", text: "GST, TDS, income tax and ROC due dates, month by month.", href: "/resources/important-dates", tone: "bg-black text-white" },
+  { icon: "calendar", title: "Important Dates", text: "GST, TDS, income tax and ROC due dates, month by month.", href: "/resources/important-dates", tone: "bg-night text-white" },
   { icon: "calculator", title: "Calculators", text: "Estimate income tax, GST and loan EMIs in seconds.", href: "/resources/calculators", tone: "bg-white" },
   { icon: "document", title: "Knowledge Center", text: "Tax, GST and regulatory updates, explained in plain language.", href: "/resources/knowledge", tone: "bg-white" },
 ];
@@ -44,8 +44,8 @@ export default function ResourcesPage() {
                   <Icon name={h.icon} className="size-10" strokeWidth={1.3} />
                   <div>
                     <h2 className="font-display text-[28px] font-semibold">{h.title}</h2>
-                    <p className={`mt-2 text-[15px] ${h.tone.includes("black") ? "text-[#a1a1a6]" : "text-ink-2"}`}>{h.text}</p>
-                    <span className={`mt-5 inline-flex items-center gap-1 text-[15px] ${h.tone.includes("black") ? "text-link-on-dark" : "text-link"}`}>
+                    <p className={`mt-2 text-[15px] ${h.tone.includes("night") ? "text-mute-dark" : "text-ink-2"}`}>{h.text}</p>
+                    <span className={`mt-5 inline-flex items-center gap-1 text-[15px] ${h.tone.includes("night") ? "text-link-on-dark" : "text-link"}`}>
                       Open <Chevron className="size-3 transition-transform group-hover:translate-x-0.5" />
                     </span>
                   </div>
@@ -62,7 +62,7 @@ export default function ResourcesPage() {
           <ul className="mt-8 grid gap-px overflow-hidden rounded-[22px] bg-line/70 sm:grid-cols-2 lg:grid-cols-4">
             {officialLinks.map((l) => (
               <li key={l.href}>
-                <a href={l.href} target="_blank" rel="noopener noreferrer" className="group flex h-full items-center justify-between gap-3 bg-white p-6 hover:bg-[#fbfbfd]">
+                <a href={l.href} target="_blank" rel="noopener noreferrer" className="group flex h-full items-center justify-between gap-3 bg-white p-6 hover:bg-[#fbf9f4]">
                   <span className="flex items-center gap-3 text-[15px] font-semibold">
                     <Icon name="link" className="size-5 text-ink-2" />
                     {l.name}

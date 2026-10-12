@@ -30,10 +30,10 @@ export default function Home() {
           <Reveal>
             <p className="type-eyebrow text-ink-2">{firm.tagline}</p>
             <h1 className="type-hero mx-auto mt-3 max-w-4xl">
-              Clarity for every <span className="bg-linear-to-r from-[#0071e3] via-[#7a5af8] to-[#e3008c] bg-clip-text text-transparent">number</span>.
+              Clarity for every <span className="bg-linear-to-r from-[#1e3a5f] to-[#c27a12] bg-clip-text text-transparent">number</span>.
             </h1>
             <p className="type-intro mx-auto mt-5 max-w-2xl text-ink-2">
-              Accounting, taxation, audit and business advisory for individuals and businesses — with practical, professional guidance.
+              Strategic, reliable and value-driven solutions in taxation, accounting, compliance and business advisory.
             </p>
             <div className="mt-9 flex flex-col items-center justify-center gap-4 sm:flex-row">
               <Button href="/contact">Request a consultation</Button>
@@ -49,9 +49,9 @@ export default function Home() {
 
         <Reveal delay={150}>
           <div className="relative mx-auto mt-16 max-w-[1100px] px-4 sm:px-6">
-            <div className="relative overflow-hidden rounded-[32px] bg-linear-to-br from-[#eef4ff] via-[#f6f0ff] to-[#fff0f6] px-6 py-14 sm:py-20">
-              <div aria-hidden="true" className="absolute -top-24 -left-24 size-80 rounded-full bg-[#0071e3]/10 blur-3xl" />
-              <div aria-hidden="true" className="absolute -right-20 -bottom-24 size-80 rounded-full bg-[#e3008c]/10 blur-3xl" />
+            <div className="relative overflow-hidden rounded-[32px] bg-linear-to-br from-canvas via-[#fbf7ef] to-saffron-soft px-6 py-14 sm:py-20">
+              <div aria-hidden="true" className="absolute -top-24 -left-24 size-80 rounded-full bg-ink/10 blur-3xl" />
+              <div aria-hidden="true" className="absolute -right-20 -bottom-24 size-80 rounded-full bg-saffron/20 blur-3xl" />
               <ul className="relative grid gap-4 sm:grid-cols-3">
                 {[
                   { icon: "percent" as const, title: "Income Tax", text: "Returns, planning & notices", href: "/services/income-tax" },
@@ -94,7 +94,7 @@ export default function Home() {
         </div>
         <div className="grid gap-3 py-3 sm:px-3 md:grid-cols-2">
           {gridServices.map((s, i) => (
-            <Reveal key={s.slug} delay={(i % 2) * 100}>
+            <Reveal key={s.slug} delay={(i % 2) * 100} className={gridServices.length % 2 && i === gridServices.length - 1 ? "md:col-span-2" : ""}>
               <ServiceTile service={s} dark={i === 3} />
             </Reveal>
           ))}
@@ -132,7 +132,7 @@ export default function Home() {
       </section>
 
       {/* 6. How it works */}
-      <section className="bg-black py-24 text-[#f5f5f7]">
+      <section className="bg-night py-24 text-cream">
         <Container>
           <Reveal>
             <SectionHeading dark eyebrow="How it works" title={"From first call\nto ongoing support."} intro="Here's what happens after you get in touch." />
@@ -141,11 +141,11 @@ export default function Home() {
             {processSteps.map((s, i) => (
               <li key={s.title} className="border-t border-white/15 pt-6">
                 <Reveal delay={(i % 3) * 100}>
-                  <span className="bg-linear-to-r from-[#2997ff] to-[#bf5af2] bg-clip-text font-display text-[48px] leading-none font-semibold text-transparent">
+                  <span className="bg-linear-to-r from-saffron to-[#f6d49a] bg-clip-text font-display text-[48px] leading-none font-semibold text-transparent">
                     {String(i + 1).padStart(2, "0")}
                   </span>
                   <p className="mt-4 font-display text-[21px] font-semibold">{s.title}</p>
-                  <p className="mt-2 text-[15px] text-[#a1a1a6]">{s.text}</p>
+                  <p className="mt-2 text-[15px] text-mute-dark">{s.text}</p>
                 </Reveal>
               </li>
             ))}
@@ -194,7 +194,7 @@ export default function Home() {
                 <Link href="/resources/knowledge" className="group block rounded-[28px] bg-ink p-8 text-white">
                   <Icon name="document" className="size-8" />
                   <h3 className="mt-6 font-display text-[24px] font-semibold">Knowledge Center</h3>
-                  <p className="mt-1 text-[15px] text-[#a1a1a6]">Tax, GST and regulatory updates explained simply.</p>
+                  <p className="mt-1 text-[15px] text-mute-dark">Tax, GST and regulatory updates explained simply.</p>
                   <span className="mt-4 inline-flex items-center gap-1 text-[15px] text-link-on-dark group-hover:underline">Read updates</span>
                 </Link>
               </Reveal>

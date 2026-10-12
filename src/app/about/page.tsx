@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { Icon } from "@/components/Icon";
 import { LocalNav } from "@/components/LocalNav";
 import { Reveal } from "@/components/Reveal";
 import { Button, Container } from "@/components/ui";
-import { approach, team, whyChoose } from "@/content/about";
+import { approach, managingDirector, team, whyChoose, type TeamMember } from "@/content/about";
 import { firm } from "@/content/site";
 
 export const metadata: Metadata = {
@@ -31,14 +32,13 @@ export default function AboutPage() {
           </Reveal>
           <Reveal delay={100}>
             <div className="mx-auto mt-14 grid max-w-4xl gap-10 text-[19px] leading-relaxed text-ink-2 md:grid-cols-2">
-              {/* Placeholder copy — replace with the firm's real profile. */}
               <p>
-                <span className="font-semibold text-ink">{firm.name}</span> is a firm of chartered accountants based in {firm.address.city},
-                providing accounting, taxation, audit, compliance and advisory services to individuals and businesses.
+                <span className="font-semibold text-ink">{firm.name}</span> is a firm of Chartered Accountants and Business Advisory Professionals
+                dedicated to delivering strategic, reliable and value-driven solutions.
               </p>
               <p>
-                We combine technical expertise with a practical understanding of how businesses operate — so our clients stay compliant and make
-                better-informed financial decisions.
+                We assist businesses, entrepreneurs, professionals and organisations in navigating taxation, accounting, regulatory compliance and
+                financial management requirements with confidence and efficiency.
               </p>
             </div>
           </Reveal>
@@ -46,7 +46,7 @@ export default function AboutPage() {
             {[
               { k: "Registration", v: firm.frn },
               { k: "Office", v: `${firm.address.city}, ${firm.address.state}` },
-              { k: "Practice areas", v: "Tax · Audit · Accounting · Advisory" },
+              { k: "Practice areas", v: "Tax · GST · Audit · Advisory" },
             ].map((d) => (
               <div key={d.k} className="bg-canvas p-6 text-center">
                 <dt className="text-[12px] tracking-wide text-ink-2 uppercase">{d.k}</dt>
@@ -60,20 +60,18 @@ export default function AboutPage() {
       <section id="team" className="scroll-mt-14 bg-canvas py-24">
         <Container>
           <Reveal>
-            <h2 className="type-headline text-center">The people behind the work.</h2>
+            <h2 className="type-headline text-center">Leadership Associates.</h2>
           </Reveal>
-          <ul className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          <Reveal>
+            <div className="mx-auto mt-14 max-w-[438px]">
+              <TeamCard member={managingDirector} />
+            </div>
+          </Reveal>
+          <ul className="mx-auto mt-5 grid max-w-4xl gap-5 sm:grid-cols-2">
             {team.map((m, i) => (
               <li key={i}>
-                <Reveal delay={(i % 4) * 80}>
-                  <div className="rounded-[22px] bg-white p-7 text-center">
-                    <div className="mx-auto grid size-24 place-items-center rounded-full bg-linear-to-br from-[#e8e8ed] to-[#d2d2d7] font-display text-[28px] font-semibold text-ink-2">
-                      {m.initials}
-                    </div>
-                    <p className="mt-5 font-display text-[19px] font-semibold">{m.name}</p>
-                    <p className="mt-1 text-[14px] text-ink-2">{m.role}</p>
-                    <p className="mt-3 inline-block rounded-full bg-canvas px-3 py-1 text-[12px] font-semibold">{m.qualifications}</p>
-                  </div>
+                <Reveal delay={(i % 2) * 80}>
+                  <TeamCard member={m} />
                 </Reveal>
               </li>
             ))}
@@ -81,7 +79,7 @@ export default function AboutPage() {
         </Container>
       </section>
 
-      <section id="approach" className="scroll-mt-14 bg-black py-24 text-[#f5f5f7]">
+      <section id="approach" className="scroll-mt-14 bg-night py-24 text-cream">
         <Container>
           <Reveal>
             <h2 className="type-headline text-center">Our approach.</h2>
@@ -90,12 +88,12 @@ export default function AboutPage() {
             {approach.map((a, i) => (
               <li key={a.title}>
                 <Reveal delay={(i % 2) * 100}>
-                  <div className="rounded-[22px] bg-[#1d1d1f] p-8">
-                    <span className="bg-linear-to-r from-[#2997ff] to-[#bf5af2] bg-clip-text font-display text-[17px] font-semibold text-transparent">
+                  <div className="rounded-[22px] bg-night-2 p-8">
+                    <span className="bg-linear-to-r from-saffron to-[#f6d49a] bg-clip-text font-display text-[17px] font-semibold text-transparent">
                       {String(i + 1).padStart(2, "0")}
                     </span>
                     <h3 className="mt-2 font-display text-[28px] font-semibold">{a.title}</h3>
-                    <p className="mt-3 text-[#a1a1a6]">{a.text}</p>
+                    <p className="mt-3 text-mute-dark">{a.text}</p>
                   </div>
                 </Reveal>
               </li>
@@ -107,7 +105,7 @@ export default function AboutPage() {
       <section id="why" className="scroll-mt-14 bg-white py-24">
         <Container>
           <Reveal>
-            <h2 className="type-headline text-center">Why clients choose us.</h2>
+            <h2 className="type-headline text-center">Why organisations choose MSS.</h2>
           </Reveal>
           <ul className="mt-14 grid gap-x-10 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
             {whyChoose.map((w) => (
@@ -125,5 +123,46 @@ export default function AboutPage() {
         </Container>
       </section>
     </>
+  );
+}
+
+function TeamCard({ member: m }: { member: TeamMember }) {
+  // Show the "CA" designation as a lighter prefix so the name itself leads.
+  const [, prefix, name] = m.name.match(/^(CA)\s+(.*)$/) ?? [null, null, m.name];
+  return (
+    <div className="h-full rounded-[22px] bg-white p-7 text-center">
+      {m.photo ? (
+        <Image
+          src={m.photo}
+          alt={m.name}
+          width={640}
+          height={800}
+          sizes="160px"
+          className="mx-auto aspect-[4/5] w-40 rounded-[18px] object-cover"
+        />
+      ) : (
+        <div className="mx-auto grid size-24 place-items-center rounded-full bg-linear-to-br from-pill to-pill-hover font-display text-[28px] font-semibold text-ink-2">
+          {m.initials}
+        </div>
+      )}
+      <h3 className="mt-6 text-balance font-display text-[21px] leading-snug font-semibold tracking-[-0.015em] text-ink">
+        {prefix && <span className="mr-1.5 font-medium text-ink-3">{prefix}</span>}
+        {name}
+      </h3>
+      <span aria-hidden className="mx-auto mt-3 block h-0.5 w-8 rounded-full bg-saffron" />
+      {m.title && (
+        <p className="mt-3 text-[12px] font-semibold tracking-[0.14em] text-ink uppercase">{m.title}</p>
+      )}
+      {m.experience && <p className="mt-3 text-[14.5px] leading-relaxed text-ink-2">{m.experience}</p>}
+      {m.qualifications && (
+        <ul className="mt-4 flex flex-wrap justify-center gap-1.5">
+          {m.qualifications.map((q) => (
+            <li key={q} className="rounded-full border border-line px-2.5 py-0.5 text-[11.5px] font-semibold tracking-[0.06em] text-ink">
+              {q}
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
   );
 }
