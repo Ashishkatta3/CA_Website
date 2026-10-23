@@ -70,7 +70,7 @@ export default function AboutPage() {
           <ul className="mx-auto mt-5 grid max-w-4xl gap-5 sm:grid-cols-2">
             {team.map((m, i) => (
               <li key={i}>
-                <Reveal delay={(i % 2) * 80}>
+                <Reveal delay={(i % 2) * 80} className="h-full">
                   <TeamCard member={m} />
                 </Reveal>
               </li>
@@ -87,8 +87,8 @@ export default function AboutPage() {
           <ol className="mt-14 grid gap-5 md:grid-cols-2">
             {approach.map((a, i) => (
               <li key={a.title}>
-                <Reveal delay={(i % 2) * 100}>
-                  <div className="rounded-[22px] bg-night-2 p-8">
+                <Reveal delay={(i % 2) * 100} className="h-full">
+                  <div className="h-full rounded-[22px] bg-night-2 p-8">
                     <span className="bg-linear-to-r from-saffron to-[#f6d49a] bg-clip-text font-display text-[17px] font-semibold text-transparent">
                       {String(i + 1).padStart(2, "0")}
                     </span>

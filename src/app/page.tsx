@@ -57,9 +57,9 @@ export default function Home() {
                   { icon: "percent" as const, title: "Income Tax", text: "Returns, planning & notices", href: "/services/income-tax" },
                   { icon: "receipt" as const, title: "GST", text: "Registration, returns & ITC", href: "/services/gst" },
                   { icon: "shield" as const, title: "Audit", text: "Statutory, tax & internal", href: "/services/audit" },
-                ].map((c, i) => (
-                  <li key={c.title} className={i === 1 ? "sm:-translate-y-6" : ""}>
-                    <Link href={c.href} className="group block rounded-[22px] bg-white/80 p-6 text-left shadow-[0_8px_30px_rgba(0,0,0,0.06)] backdrop-blur transition-transform duration-500 ease-apple hover:-translate-y-1 hover:scale-[1.02]">
+                ].map((c) => (
+                  <li key={c.title}>
+                    <Link href={c.href} className="group block h-full rounded-[22px] bg-white/80 p-6 text-left shadow-[0_8px_30px_rgba(0,0,0,0.06)] backdrop-blur transition-transform duration-500 ease-apple hover:-translate-y-1 hover:scale-[1.02]">
                       <span className="grid size-11 place-items-center rounded-[12px] bg-ink text-white"><Icon name={c.icon} className="size-6" /></span>
                       <p className="mt-5 font-display text-[21px] font-semibold">{c.title}</p>
                       <p className="mt-1 text-[15px] text-ink-2">{c.text}</p>
@@ -94,8 +94,12 @@ export default function Home() {
         </div>
         <div className="grid gap-3 py-3 sm:px-3 md:grid-cols-2">
           {gridServices.map((s, i) => (
-            <Reveal key={s.slug} delay={(i % 2) * 100} className={gridServices.length % 2 && i === gridServices.length - 1 ? "md:col-span-2" : ""}>
-              <ServiceTile service={s} dark={i === 3} />
+            <Reveal
+              key={s.slug}
+              delay={(i % 2) * 100}
+              className={`h-full ${gridServices.length % 2 && i === gridServices.length - 1 ? "md:col-span-2 md:mx-auto md:w-[calc(50%-0.375rem)]" : ""}`}
+            >
+              <ServiceTile service={s} />
             </Reveal>
           ))}
         </div>
