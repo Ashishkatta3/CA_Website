@@ -16,7 +16,7 @@ export function ServiceTile({ service, dark = false, wide = false }: { service: 
   const chips = service.offerings.slice(0, wide ? 6 : 4);
   return (
     <article
-      className={`flex flex-col items-center overflow-hidden text-center ${wide ? "px-6 pt-14 pb-16" : "rounded-none px-6 pt-12 pb-12 sm:rounded-[28px]"} ${dark ? "bg-night text-cream" : wide ? "bg-canvas" : "bg-white"}`}
+      className={`flex h-full flex-col items-center overflow-hidden text-center ${wide ? "px-6 pt-14 pb-16" : "rounded-none px-6 pt-12 pb-12 sm:rounded-[28px]"} ${dark ? "bg-night text-cream" : wide ? "bg-canvas" : "bg-white"}`}
     >
       <h3 className={wide ? "type-headline" : "type-tile"}>{service.name}</h3>
       <p className={`mt-2 whitespace-pre-line ${wide ? "type-intro" : "text-[19px] leading-snug sm:text-[21px]"} ${dark ? "text-mute-dark" : "text-ink-2"}`}>
