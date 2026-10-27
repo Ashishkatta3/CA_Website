@@ -2,9 +2,9 @@
 // winding S-trail climbs the tall peak to a saffron flag. Standalone SVGs live
 // in /public/brand; the favicon is src/app/icon.svg.
 
-const NAVY = "#0D1B2A";
-const CREAM = "#F2EDE3";
-const SAFFRON = "#E8A33D";
+const NAVY = "var(--color-ink)";
+const CREAM = "var(--color-cream)";
+const SAFFRON = "var(--color-saffron)";
 
 // "full" carries the trail and flagpole; "compact" drops them so the mark stays
 // crisp at nav size (under ~40px), as in the brand sheet's small-size lockups.
@@ -37,10 +37,10 @@ export function LogoMark({
 
 export function Wordmark({ className = "", caption = false, dark = false }: { className?: string; caption?: boolean; dark?: boolean }) {
   return (
-    <span className={`flex flex-col leading-none font-brand ${dark ? "text-white" : "text-[#0D1B2A]"} ${className}`}>
+    <span className={`flex flex-col leading-none font-brand ${dark ? "text-white" : "text-ink"} ${className}`}>
       <span className="font-black tracking-[-0.03em]">MSS</span>
       <span className="mt-[0.3em] text-[0.42em] font-bold tracking-[0.34em] uppercase">Advisory Services</span>
-      {caption && <span className={`mt-[0.55em] text-[0.42em] font-medium tracking-[0.04em] ${dark ? "text-white/70" : "text-[#4A5560]"}`}>Chartered Accountants · Business Advisory</span>}
+      {caption && <span className={`mt-[0.55em] text-[0.42em] font-medium tracking-[0.04em] ${dark ? "text-white/70" : "text-ink-2"}`}>Chartered Accountants · Business Advisory</span>}
     </span>
   );
 }

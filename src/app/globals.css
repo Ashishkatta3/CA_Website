@@ -23,6 +23,29 @@
   /* Segmented controls and soft fills */
   --color-pill: #ece6d9;
   --color-pill-hover: #e2dacb;
+  /* Accent tints, nav glass and one-off highlights */
+  --color-accent-light: #f6d49a;
+  --color-accent-ink: #7a4a08;
+  --color-canvas-2: #fbf7ef;
+  --color-nav: #fbf9f4;
+  --color-hero-a: #1e3a5f;
+  --color-hero-b: #c27a12;
+  --color-chart-2: #7fa6c9;
+  /* Service icon gradients */
+  --color-svc-income-tax-a: #2e4e73;
+  --color-svc-income-tax-b: #4f7ca8;
+  --color-svc-gst-a: #c27a12;
+  --color-svc-gst-b: #e8a33d;
+  --color-svc-accounting-a: #3b5f86;
+  --color-svc-accounting-b: #7fa6c9;
+  --color-svc-audit-a: #b5651d;
+  --color-svc-audit-b: #e8a33d;
+  --color-svc-tds-a: #24476b;
+  --color-svc-tds-b: #5d86b0;
+  --color-svc-advisory-a: #d98a1f;
+  --color-svc-advisory-b: #f2c46b;
+  --color-svc-registrations-a: #2e4e73;
+  --color-svc-registrations-b: #d98a1f;
 
   --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", var(--font-inter), "Helvetica Neue", Helvetica, Arial, sans-serif;
   --font-brand: var(--font-archivo), "Helvetica Neue", Arial, sans-serif;

@@ -106,7 +106,7 @@ export default async function ServicePage(props: PageProps<"/services/[slug]">) 
           <ol className="no-scrollbar mt-14 flex snap-x gap-4 overflow-x-auto pb-2 lg:grid lg:grid-cols-6 lg:overflow-visible">
             {processSteps.map((s, i) => (
               <li key={s.title} className="w-[220px] shrink-0 snap-start rounded-[22px] bg-night-2 p-6 lg:w-auto">
-                <span className="bg-linear-to-r from-saffron to-[#f6d49a] bg-clip-text font-display text-[32px] font-semibold text-transparent">{i + 1}</span>
+                <span className="bg-linear-to-r from-saffron to-accent-light bg-clip-text font-display text-[32px] font-semibold text-transparent">{i + 1}</span>
                 <p className="mt-3 text-[15px] leading-snug font-semibold">{s.title}</p>
                 <p className="mt-2 text-[13px] text-mute-dark">{s.text}</p>
               </li>

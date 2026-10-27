@@ -25,7 +25,6 @@ export default async function ContactPage(props: PageProps<"/contact">) {
   const audience = typeof sp.for === "string" ? sp.for : undefined;
   const defaultNeed = needOptions.some((n) => n.id === service) ? service : undefined;
 
-  const { address } = firm;
 
   return (
     <div className="bg-canvas">
@@ -54,12 +53,15 @@ export default async function ContactPage(props: PageProps<"/contact">) {
                 <Icon name="mail" className="mt-0.5 size-5 shrink-0 text-ink-2" />
                 <a href={`mailto:${firm.email}`} className="text-link hover:underline">{firm.email}</a>
               </li>
-              <li className="flex gap-3">
-                <Icon name="pin" className="mt-0.5 size-5 shrink-0 text-ink-2" />
-                <address className="not-italic">
-                  {address.line1}<br />{address.line2}<br />{address.city}, {address.state} {address.pin}
-                </address>
-              </li>
+              {firm.offices.map((o) => (
+                <li key={o.label} className="flex gap-3">
+                  <Icon name="pin" className="mt-0.5 size-5 shrink-0 text-ink-2" />
+                  <address className="not-italic">
+                    <span className="font-semibold">{o.label}</span>
+                    <br />{o.line1}<br />{o.line2}<br />{o.city}, {o.state} {o.pin}
+                  </address>
+                </li>
+              ))}
             </ul>
           </div>
 
@@ -77,15 +79,18 @@ export default async function ContactPage(props: PageProps<"/contact">) {
             </dl>
           </div>
 
-          <div className="overflow-hidden rounded-[28px] bg-white">
-            <iframe
-              title="Office location map"
-              src={`https://www.google.com/maps?q=${encodeURIComponent(address.mapQuery)}&output=embed`}
-              className="h-64 w-full border-0"
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-            />
-          </div>
+          {firm.offices.map((o) => (
+            <div key={o.label} className="overflow-hidden rounded-[28px] bg-white">
+              <p className="px-6 pt-5 pb-4 text-[15px] font-semibold">{o.label}</p>
+              <iframe
+                title={`${o.label} map`}
+                src={`https://www.google.com/maps?q=${encodeURIComponent(o.mapQuery)}&output=embed`}
+                className="h-56 w-full border-0"
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              />
+            </div>
+          ))}
         </aside>
       </Container>
     </div>

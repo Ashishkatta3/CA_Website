@@ -3,13 +3,13 @@ import { Icon } from "./Icon";
 import { MoreLink } from "./ui";
 
 export const serviceGradient: Record<string, string> = {
-  "income-tax": "from-[#2e4e73] to-[#4f7ca8]",
-  gst: "from-[#c27a12] to-[#e8a33d]",
-  accounting: "from-[#3b5f86] to-[#7fa6c9]",
-  audit: "from-[#b5651d] to-[#e8a33d]",
-  tds: "from-[#24476b] to-[#5d86b0]",
-  advisory: "from-[#d98a1f] to-[#f2c46b]",
-  registrations: "from-[#2e4e73] to-[#d98a1f]",
+  "income-tax": "from-svc-income-tax-a to-svc-income-tax-b",
+  gst: "from-svc-gst-a to-svc-gst-b",
+  accounting: "from-svc-accounting-a to-svc-accounting-b",
+  audit: "from-svc-audit-a to-svc-audit-b",
+  tds: "from-svc-tds-a to-svc-tds-b",
+  advisory: "from-svc-advisory-a to-svc-advisory-b",
+  registrations: "from-svc-registrations-a to-svc-registrations-b",
 };
 
 export function ServiceTile({ service, dark = false, wide = false }: { service: Service; dark?: boolean; wide?: boolean }) {
