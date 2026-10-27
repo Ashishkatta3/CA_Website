@@ -45,7 +45,7 @@ export default function AboutPage() {
           <dl className="mx-auto mt-16 grid max-w-4xl gap-px overflow-hidden rounded-[22px] bg-line/70 sm:grid-cols-3">
             {[
               { k: "Registration", v: firm.frn },
-              { k: "Office", v: `${firm.address.city}, ${firm.address.state}` },
+              { k: "Offices", v: `${firm.offices.map((o) => o.city).join(" & ")}, Andhra Pradesh` },
               { k: "Practice areas", v: "Tax · GST · Audit · Advisory" },
             ].map((d) => (
               <div key={d.k} className="bg-canvas p-6 text-center">
@@ -89,7 +89,7 @@ export default function AboutPage() {
               <li key={a.title}>
                 <Reveal delay={(i % 2) * 100} className="h-full">
                   <div className="h-full rounded-[22px] bg-night-2 p-8">
-                    <span className="bg-linear-to-r from-saffron to-[#f6d49a] bg-clip-text font-display text-[17px] font-semibold text-transparent">
+                    <span className="bg-linear-to-r from-saffron to-accent-light bg-clip-text font-display text-[17px] font-semibold text-transparent">
                       {String(i + 1).padStart(2, "0")}
                     </span>
                     <h3 className="mt-2 font-display text-[28px] font-semibold">{a.title}</h3>

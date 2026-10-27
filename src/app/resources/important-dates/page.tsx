@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Button, Container } from "@/components/ui";
-import { datesLastReviewed, importantDates } from "@/content/important-dates";
+import { datesLastReviewed } from "@/content/important-dates";
 import { DatesBrowser } from "./DatesBrowser";
 
 export const metadata: Metadata = {
@@ -22,11 +22,11 @@ export default function ImportantDatesPage() {
       </section>
 
       <Container className="max-w-[860px] pt-12">
-        <p className="mb-10 rounded-[18px] bg-saffron-soft px-5 py-4 text-[14px] text-[#7a4a08]">
+        <p className="mb-10 rounded-[18px] bg-saffron-soft px-5 py-4 text-[14px] text-accent-ink">
           Checked daily against official government sources (incometax.gov.in, gst.gov.in, mca.gov.in); last checked {reviewed}. Each date links to its
           source. Dates can change by notification, so please confirm with us before relying on them.
         </p>
-        <DatesBrowser dates={importantDates} />
+        <DatesBrowser />
         <div className="mt-16 text-center">
           <p className="font-display text-[24px] font-semibold">Want us to track these for you?</p>
           <Button href="/contact" className="mt-5">Talk to us</Button>

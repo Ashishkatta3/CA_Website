@@ -45,7 +45,7 @@ export const managingDirector: TeamMember = {
 
 export const team: TeamMember[] = [
   { name: "CA V. Bala Murali Krishna Reddy", experience: "20+ years of professional excellence", qualifications: ["FCA"], initials: "BR", photo: "/team/bala-murali-krishna-reddy.jpg" },
-  { name: "P. Srinivas Rao", experience: "15+ years in Accounting & Compliance", qualifications: ["B.Com"], initials: "SR", photo: "/team/srinivas.jpg" },
-  { name: "CA G. Siva Sankar Reddy", experience: "5+ years in Taxation, GST & Advisory Services", qualifications: ["ACA"], initials: "SS", photo: "/team/siva-sankar-reddy.jpg" },
-  { name: "CA Sainadh Velugula", experience: "3+ years in Taxation, Corporate Law & Financial Advisory", qualifications: ["ACA", "CMA", "LLB"], initials: "SV", photo: "/team/sainadh-velugula.jpg" },
+  { name: "P. Srinivas Rao", experience: "15+ years of expertise in Accounting & Compliance", qualifications: ["B.Com"], initials: "SR", photo: "/team/srinivas.jpg" },
+  { name: "CA G. Siva Sankar Reddy", experience: "5+ years of experience in Taxation, GST & Advisory Services", qualifications: ["ACA"], initials: "SS", photo: "/team/siva-sankar-reddy.jpg" },
+  { name: "CA Sainadh Velugula", experience: "3+ years of experience in Taxation, Corporate Law & Financial Advisory", qualifications: ["ACA", "CMA", "LLB"], initials: "SV", photo: "/team/sainadh-velugula.jpg" },
 ];

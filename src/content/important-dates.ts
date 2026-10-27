@@ -137,13 +137,14 @@ const LOOKBACK_MONTHS = 3;
 
 const iso = (y: number, m: number, d: number) => `${y}-${String(m).padStart(2, "0")}-${String(d).padStart(2, "0")}`;
 
-function buildCalendar(): DueDate[] {
-  const [startY, startM] = data.lastChecked.split("-").map(Number);
-  const windowStart = iso(startY, startM, 1);
+// Due dates from `today` (YYYY-MM-DD) up to WINDOW_MONTHS ahead, so the
+// calendar rolls forward on its own.
+export function calendarFrom(today: string): DueDate[] {
+  const [startY, startM, startD] = today.split("-").map(Number);
   const overrides = new Map(data.overrides.map((o) => [o.key, o]));
 
   const generated: DueDate[] = [];
-  for (let i = -LOOKBACK_MONTHS; i < WINDOW_MONTHS; i++) {
+  for (let i = -LOOKBACK_MONTHS; i <= WINDOW_MONTHS; i++) {
     const idx = startY * 12 + (startM - 1) + i;
     const y = Math.floor(idx / 12);
     const m = (idx % 12) + 1;
@@ -158,10 +159,9 @@ function buildCalendar(): DueDate[] {
     }
   }
 
-  const windowEnd = iso(startY + Math.floor((startM - 1 + WINDOW_MONTHS) / 12), ((startM - 1 + WINDOW_MONTHS) % 12) + 1, 1);
+  const endIdx = startY * 12 + (startM - 1) + WINDOW_MONTHS;
+  const windowEnd = iso(Math.floor(endIdx / 12), (endIdx % 12) + 1, startD);
   return [...generated, ...data.events]
-    .filter((d) => d.date >= windowStart && d.date < windowEnd)
+    .filter((d) => d.date >= today && d.date < windowEnd)
     .sort((a, b) => a.date.localeCompare(b.date) || a.title.localeCompare(b.title));
 }
-
-export const importantDates: DueDate[] = buildCalendar();

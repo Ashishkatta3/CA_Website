@@ -62,7 +62,7 @@ export default function ResourcesPage() {
           <ul className="mt-8 grid gap-px overflow-hidden rounded-[22px] bg-line/70 sm:grid-cols-2 lg:grid-cols-4">
             {officialLinks.map((l) => (
               <li key={l.href}>
-                <a href={l.href} target="_blank" rel="noopener noreferrer" className="group flex h-full items-center justify-between gap-3 bg-white p-6 hover:bg-[#fbf9f4]">
+                <a href={l.href} target="_blank" rel="noopener noreferrer" className="group flex h-full items-center justify-between gap-3 bg-white p-6 hover:bg-nav">
                   <span className="flex items-center gap-3 text-[15px] font-semibold">
                     <Icon name="link" className="size-5 text-ink-2" />
                     {l.name}

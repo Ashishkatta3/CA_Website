@@ -6,7 +6,7 @@ import { firm, nav, type NavItem } from "@/content/site";
 import { LogoMark, Wordmark } from "./Brand";
 import { Chevron } from "./ui";
 
-const glass = "bg-[rgba(251,249,244,0.86)] backdrop-blur-[20px] backdrop-saturate-[1.8]";
+const glass = "bg-nav/86 backdrop-blur-[20px] backdrop-saturate-[1.8]";
 
 export function Logo({ className = "" }: { className?: string }) {
   return (
@@ -70,10 +70,6 @@ export function GlobalNav() {
             ))}
           </ul>
 
-          <Link href="/contact" onClick={closeAll} className="hidden rounded-full bg-accent px-3 py-1 text-[12px] text-white transition-colors hover:bg-accent-hover md:ml-6 md:inline-block">
-            Enquire
-          </Link>
-
           <button
             type="button"
             className="-mr-2 grid size-10 place-items-center md:hidden"
@@ -128,7 +124,7 @@ export function GlobalNav() {
       />
 
       {/* Mobile menu */}
-      <div className={`fixed inset-x-0 top-12 bottom-0 z-10 overflow-y-auto bg-[#fbf9f4] transition-opacity duration-300 md:hidden ${mobileOpen ? "opacity-100" : "pointer-events-none invisible opacity-0"}`}>
+      <div className={`fixed inset-x-0 top-12 bottom-0 z-10 overflow-y-auto bg-nav transition-opacity duration-300 md:hidden ${mobileOpen ? "opacity-100" : "pointer-events-none invisible opacity-0"}`}>
         <ul className="px-10 pt-6 pb-16">
           {nav.map((item) => (
             <li key={item.label} className="border-b border-transparent">

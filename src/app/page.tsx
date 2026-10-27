@@ -7,7 +7,6 @@ import { ServiceTile } from "@/components/ServiceTile";
 import { Button, Container, MoreLink, SectionHeading } from "@/components/ui";
 import { UpcomingDates } from "@/components/UpcomingDates";
 import { processSteps, trustPoints, whyChoose } from "@/content/about";
-import { importantDates } from "@/content/important-dates";
 import { industries } from "@/content/industries";
 import { getService, services } from "@/content/services";
 import { firm } from "@/content/site";
@@ -30,7 +29,7 @@ export default function Home() {
           <Reveal>
             <p className="type-eyebrow text-ink-2">{firm.tagline}</p>
             <h1 className="type-hero mx-auto mt-3 max-w-4xl">
-              Clarity for every <span className="bg-linear-to-r from-[#1e3a5f] to-[#c27a12] bg-clip-text text-transparent">number</span>.
+              Clarity for every <span className="bg-linear-to-r from-hero-a to-hero-b bg-clip-text text-transparent">number</span>.
             </h1>
             <p className="type-intro mx-auto mt-5 max-w-2xl text-ink-2">
               Strategic, reliable and value-driven solutions in taxation, accounting, compliance and business advisory.
@@ -40,7 +39,7 @@ export default function Home() {
               <Button href="/services" variant="secondary">Explore our services</Button>
             </div>
             <ul className="mt-10 flex flex-col items-center justify-center gap-x-8 gap-y-2 text-[14px] text-ink-2 sm:flex-row">
-              <li className="flex items-center gap-1.5"><Icon name="pin" className="size-4" />{firm.address.city}, India</li>
+              <li className="flex items-center gap-1.5"><Icon name="pin" className="size-4" />{firm.offices.map((o) => o.city).join(" & ")}, India</li>
               <li><a href={firm.phoneHref} className="flex items-center gap-1.5 hover:text-link"><Icon name="phone" className="size-4" />{firm.phone}</a></li>
               <li><a href={`mailto:${firm.email}`} className="flex items-center gap-1.5 hover:text-link"><Icon name="mail" className="size-4" />{firm.email}</a></li>
             </ul>
@@ -49,7 +48,7 @@ export default function Home() {
 
         <Reveal delay={150}>
           <div className="relative mx-auto mt-16 max-w-[1100px] px-4 sm:px-6">
-            <div className="relative overflow-hidden rounded-[32px] bg-linear-to-br from-canvas via-[#fbf7ef] to-saffron-soft px-6 py-14 sm:py-20">
+            <div className="relative overflow-hidden rounded-[32px] bg-linear-to-br from-canvas via-canvas-2 to-saffron-soft px-6 py-14 sm:py-20">
               <div aria-hidden="true" className="absolute -top-24 -left-24 size-80 rounded-full bg-ink/10 blur-3xl" />
               <div aria-hidden="true" className="absolute -right-20 -bottom-24 size-80 rounded-full bg-saffron/20 blur-3xl" />
               <ul className="relative grid gap-4 sm:grid-cols-3">
@@ -145,7 +144,7 @@ export default function Home() {
             {processSteps.map((s, i) => (
               <li key={s.title} className="border-t border-white/15 pt-6">
                 <Reveal delay={(i % 3) * 100}>
-                  <span className="bg-linear-to-r from-saffron to-[#f6d49a] bg-clip-text font-display text-[48px] leading-none font-semibold text-transparent">
+                  <span className="bg-linear-to-r from-saffron to-accent-light bg-clip-text font-display text-[48px] leading-none font-semibold text-transparent">
                     {String(i + 1).padStart(2, "0")}
                   </span>
                   <p className="mt-4 font-display text-[21px] font-semibold">{s.title}</p>
@@ -174,7 +173,7 @@ export default function Home() {
                   <MoreLink href="/resources/important-dates" className="shrink-0 text-[15px]">View all</MoreLink>
                 </div>
                 <div className="mt-2">
-                  <UpcomingDates dates={importantDates} />
+                  <UpcomingDates />
                 </div>
               </div>
             </Reveal>

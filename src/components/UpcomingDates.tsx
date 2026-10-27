@@ -1,7 +1,7 @@
 "use client";
 
 import { useSyncExternalStore } from "react";
-import type { DueDate } from "@/content/important-dates";
+import { calendarFrom, type DueDate } from "@/content/important-dates";
 
 export const categoryColor: Record<DueDate["category"], string> = {
   GST: "text-[#00a37a] bg-[#e6f7f2]",
@@ -15,15 +15,22 @@ const fmt = (iso: string) => {
   return { day: d.getDate(), month: d.toLocaleString("en-IN", { month: "short" }) };
 };
 
-// Next few due dates from today (falls back to the first entries before hydration).
-export function UpcomingDates({ dates, limit = 4 }: { dates: DueDate[]; limit?: number }) {
+// Before hydration there is no visitor date, so fall back to the date the
+// page was rendered; the browser then swaps in its own today.
+const renderedOn = new Date().toLocaleDateString("en-CA");
+
+export function useCalendar(): DueDate[] {
   const today = useSyncExternalStore(
     () => () => {},
     () => new Date().toLocaleDateString("en-CA"),
     () => null,
   );
+  return calendarFrom(today ?? renderedOn);
+}
 
-  const upcoming = (today ? dates.filter((d) => d.date >= today) : dates).slice(0, limit);
+// Next few due dates from today.
+export function UpcomingDates({ limit = 4 }: { limit?: number }) {
+  const upcoming = useCalendar().slice(0, limit);
 
   if (!upcoming.length) return <p className="text-ink-2">No upcoming dates listed. Check back soon.</p>;
 

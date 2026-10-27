@@ -1,12 +1,13 @@
 "use client";
 
 import { useState } from "react";
-import { categoryColor } from "@/components/UpcomingDates";
+import { categoryColor, useCalendar } from "@/components/UpcomingDates";
 import type { DueDate } from "@/content/important-dates";
 
 const filters = ["All", "GST", "TDS", "Income Tax", "ROC"] as const;
 
-export function DatesBrowser({ dates }: { dates: DueDate[] }) {
+export function DatesBrowser() {
+  const dates = useCalendar();
   const [filter, setFilter] = useState<(typeof filters)[number]>("All");
   const shown = dates.filter((d) => filter === "All" || d.category === filter);
 
@@ -49,7 +50,7 @@ export function DatesBrowser({ dates }: { dates: DueDate[] }) {
                       <p className="text-[16px] leading-snug">
                         {d.title}
                         {d.extendedFrom && (
-                          <span className="ml-2 inline-block rounded-full bg-saffron-soft px-2 py-0.5 align-middle text-[11px] font-semibold text-[#7a4a08]">Extended</span>
+                          <span className="ml-2 inline-block rounded-full bg-saffron-soft px-2 py-0.5 align-middle text-[11px] font-semibold text-accent-ink">Extended</span>
                         )}
                       </p>
                       {d.note && <p className="mt-0.5 text-[13px] text-ink-2">{d.note}</p>}

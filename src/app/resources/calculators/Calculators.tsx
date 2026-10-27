@@ -286,11 +286,11 @@ function Emi() {
             <div className="mt-8">
               <div className="flex h-2.5 overflow-hidden rounded-full bg-white/10">
                 <div className="bg-saffron" style={{ width: `${(principal / totalPaid) * 100}%` }} />
-                <div className="bg-[#7fa6c9]" style={{ flex: 1 }} />
+                <div className="bg-chart-2" style={{ flex: 1 }} />
               </div>
               <div className="mt-3 flex gap-5 text-[12px] text-mute-dark">
                 <span className="flex items-center gap-1.5"><span className="size-2 rounded-full bg-saffron" />Principal</span>
-                <span className="flex items-center gap-1.5"><span className="size-2 rounded-full bg-[#7fa6c9]" />Interest</span>
+                <span className="flex items-center gap-1.5"><span className="size-2 rounded-full bg-chart-2" />Interest</span>
               </div>
             </div>
           )}

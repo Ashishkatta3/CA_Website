@@ -40,8 +40,12 @@ export function Footer() {
         </nav>
 
         <div className="border-t border-line py-4">
+          {firm.offices.map((o) => (
+            <p key={o.label} className="mb-1">
+              <span className="font-semibold">{o.label}:</span> {o.line1}, {o.line2}, {o.city}, {o.state} {o.pin}
+            </p>
+          ))}
           <p className="mb-2">
-            {firm.address.line1}, {firm.address.line2}, {firm.address.city}, {firm.address.state} {firm.address.pin} ·{" "}
             <a href={firm.phoneHref} className="hover:text-ink hover:underline">{firm.phone}</a> ·{" "}
             <a href={`mailto:${firm.email}`} className="hover:text-ink hover:underline">{firm.email}</a>
           </p>
