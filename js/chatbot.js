@@ -27,9 +27,8 @@
     accounting: ["accounting", "bookkeeping", "tally", "zoho", "books", "mis", "balance sheet", "accounts"],
     audit: ["audit", "statutory audit", "tax audit", "internal audit", "assurance"],
     tds: ["tds", "tcs", "payroll", "24q", "26q", "form 138", "form 140", "form 130", "form 16a", "traces", "tds return"],
-    corporate: ["company", "llp", "roc", "mca", "incorporat", "director", "private limited", "pvt ltd", "annual filing"],
     advisory: ["project report", "cma", "loan", "bank", "projection", "feasibility", "dpr", "working capital", "finance", "advisory"],
-    registrations: ["registration", "register", "udyam", "msme", "firm registration", "partnership", "trust", "ngo", "pan", "tan", "iec", "startup"]
+    registrations: ["company", "llp", "roc", "mca", "incorporat", "director", "private limited", "pvt ltd", "annual filing", "registration", "register", "udyam", "msme", "firm registration", "partnership", "trust", "ngo", "pan", "tan", "iec", "startup"]
   };
 
   function contactLines() {
@@ -67,9 +66,9 @@
           "<b>Company / LLP:</b> PAN, Aadhaar and address proof of directors or partners, photos, registered office proof with NOC, and proposed names.<br><br>" +
           "<b>Project report / CMA:</b> last 2–3 years' financials and ITRs, GST returns, bank statements and asset quotations.";
       }, options: [{ label: "Request a callback", intent: "callback" }, { label: "Main menu", intent: "menu" }] },
-    { id: "location", keywords: ["address", "location", "where", "office", "visit", "directions", "map", "guntur", "lakshmipuram", "ashok nagar"],
+    { id: "location", keywords: ["address", "location", "where", "office", "visit", "directions", "map", "guntur", "lakshmipuram", "ashok nagar", "vijayawada", "mogalrajpuram", "branch"],
       reply: function () {
-        return "<b>" + esc(F.full) + "</b><br>" + esc(F.offices[0].address) +
+        return F.offices.map(function (o) { return "<b>" + esc(o.name) + "</b><br>" + esc(o.address); }).join("<br><br>") +
           (F.hours.length ? "<br><br><b>Hours:</b> " + F.hours.map(function (h) { return h[0] + ": " + h[1]; }).join(" · ") : "") +
           ' <a href="contact.html#visit">View map ›</a>';
       }, options: [{ label: "Contact details", intent: "contact" }, { label: "Main menu", intent: "menu" }] },

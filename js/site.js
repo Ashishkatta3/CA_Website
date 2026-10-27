@@ -8,8 +8,8 @@
 
   var menus = [
     { id: "about", label: "About", href: "about.html", groups: [
-      { title: "Explore About", big: true, links: [["About Us", "about.html#profile"], ["Leadership Associates", "about.html#team"], ["Service Portfolio", "about.html#portfolio"], ["Why Choose MSS", "about.html#why"]] },
-      { title: "More", links: [["Careers", "careers.html"], ["Contact", "contact.html"]] }
+      { title: "Explore About", big: true, links: [["Firm Profile", "about.html#profile"], ["Our Team", "about.html#team"], ["Our Approach", "about.html#approach"], ["Why Choose Us", "about.html#why"]] },
+      { title: "More", links: [["Careers", "careers.html"]] }
     ] },
     { id: "services", label: "Services", href: "services.html", groups: [
       { title: "Explore Services", big: true, links: S.services.slice(0, 4).map(function (s) { return [s.name, "service.html?s=" + s.id]; }) },
@@ -23,13 +23,11 @@
       { title: "Explore Resources", big: true, links: [["Important Dates", "important-dates.html"], ["Calculators", "calculators.html"], ["Knowledge Center", "knowledge.html"]] },
       { title: "Tools", links: [["Income Tax Calculator", "calculators.html?tab=income-tax"], ["GST Calculator", "calculators.html?tab=gst"], ["EMI Calculator", "calculators.html?tab=emi"], ["Useful Links", "resources.html#links"]] }
     ] },
-    { id: "careers", label: "Careers", href: "careers.html" },
-    { id: "contact", label: "Contact", href: "contact.html" }
+    { id: "careers", label: "Careers", href: "careers.html" }
   ];
 
-  function brand() {
-    return S.logoMark("brand__mark") +
-      '<span class="brand__name"><b>' + esc(F.full) + "</b><small>Chartered Accountants</small></span>";
+  function brand(full) {
+    return '<span class="brand__name"><b>' + esc(F.name) + '</b><span class="brand__sub"><small>' + esc(F.suffix) + '</small><i>' + esc(full ? F.tagline : "Chartered Accountants") + "</i></span></span>";
   }
 
   /* ---------- Header ---------- */
@@ -57,12 +55,12 @@
       '<nav class="gnav__bar" aria-label="Main"><div class="gnav__inner">' +
         '<a class="brand" href="index.html" aria-label="' + esc(F.full) + ' home">' + brand() + "</a>" +
         '<ul class="gnav__links">' + links + "</ul>" +
-        '<a class="gnav__cta" href="contact.html">Enquire</a>' +
+        '<a class="gnav__cta" href="contact.html"' + (page === "contact" ? ' aria-current="page"' : "") + ">Contact us</a>" +
         '<button class="gnav__burger" type="button" aria-label="Menu" aria-expanded="false"><span><i></i><i></i></span></button>' +
       "</div>" + flyouts + "</nav>" +
       '<div class="flyout-scrim"></div>' +
       '<div class="mmenu"><ul class="mmenu__list">' + mobile +
-        '<li class="mmenu__cta"><a class="btn btn--primary" href="contact.html">Request a consultation</a></li></ul></div>';
+        '<li class="mmenu__cta"><a class="btn btn--primary" href="contact.html">Contact us</a></li></ul></div>';
 
     // Desktop flyouts (hover with a small close delay)
     var scrim = header.querySelector(".flyout-scrim"), openId = null, closeT;
@@ -111,23 +109,23 @@
       ["Services", S.services.map(function (s) { return [s.short, "service.html?s=" + s.id]; })],
       ["Who We Serve", S.industries.map(function (i) { return [i.short || i.name, "industries.html#" + i.id]; })],
       ["Resources", [["Important Dates", "important-dates.html"], ["Calculators", "calculators.html"], ["Knowledge Center", "knowledge.html"], ["Useful Links", "resources.html#links"]]],
-      ["About the Firm", [["About Us", "about.html#profile"], ["Leadership", "about.html#team"], ["Service Portfolio", "about.html#portfolio"], ["Careers", "careers.html"]]],
+      ["About the Firm", [["Firm Profile", "about.html#profile"], ["Our Team", "about.html#team"], ["Our Approach", "about.html#approach"], ["Careers", "careers.html"]]],
       ["Contact", [["Request a Consultation", "contact.html"], ["Office & Hours", "contact.html#visit"]]]
     ];
     footer.className = "gfoot";
     footer.innerHTML = '<div class="wrap">' +
       '<div class="gfoot__notes"><p>The information on this website is for general information only and does not constitute professional advice. Please consult us about your specific circumstances before acting on any information here.</p>' +
       "<p>Tax rates, due dates and calculators are indicative and may change through notifications or amendments. Verify against official sources or speak to us before relying on them.</p></div>" +
-      '<div class="gfoot__brand"><a class="brand" href="index.html" aria-label="' + esc(F.full) + ' home">' + brand() + "</a></div>" +
+      '<div class="gfoot__brand"><a class="brand" href="index.html" aria-label="' + esc(F.full) + ' home">' + brand(true) + "</a></div>" +
       '<nav class="gfoot__nav" aria-label="Footer">' + cols.map(function (c) {
         return "<div><h3>" + c[0] + "</h3><ul>" + c[1].map(function (l) { return '<li><a href="' + l[1] + '">' + esc(l[0]) + "</a></li>"; }).join("") + "</ul></div>";
       }).join("") + "</nav>" +
-      '<div class="gfoot__legal"><p class="gfoot__practice">' + esc(F.practice) + "<br>" + esc(F.slogan) + "</p><p>" + [esc(F.offices[0].address)]
+      '<div class="gfoot__legal">' + F.offices.map(function (o) { return "<p><b>" + esc(o.name) + ":</b> " + esc(o.address) + "</p>"; }).join("") + "<p>" + []
         .concat(F.phone ? ['<a href="' + F.phoneHref + '">' + F.phone + "</a>"] : [])
         .concat(F.mobile ? ['<a href="' + F.mobileHref + '">' + F.mobile + "</a>"] : [])
         .concat(['<a href="mailto:' + F.email + '">' + F.email + "</a>"]).join(" · ") + "</p>" +
-      '<div class="gfoot__bottom"><p>Copyright © ' + new Date().getFullYear() + " " + esc(F.full) + ". All rights reserved." + (F.frn && F.frn.indexOf("XXXX") < 0 ? " " + esc(F.frn) : "") + "</p>" +
-      '<ul><li><a href="privacy.html">Privacy Policy</a></li><li><a href="terms.html">Terms of Use</a></li><li><a href="disclaimer.html">Disclaimer</a></li></ul></div></div>' +
+      '<div class="gfoot__bottom"><p>Copyright © ' + new Date().getFullYear() + " " + esc(F.full) + " All rights reserved." + (S.hasFrn() ? " " + esc(F.frn) : "") + "</p>" +
+      '<ul><li><a href="privacy.html">Privacy Policy</a></li><li><a href="terms.html">Terms of Use</a></li><li><a href="disclaimer.html">Disclaimer</a></li><li><a href="services.html">Sitemap</a></li></ul></div></div>' +
       "</div>";
   }
 
@@ -141,12 +139,12 @@
     modal.setAttribute("role", "dialog");
     modal.setAttribute("aria-modal", "true");
     modal.setAttribute("aria-labelledby", "disc-title");
-    modal.innerHTML = '<div class="modal__box"><p class="t-eyebrow" style="font-size:15px">Disclaimer</p><h2 id="disc-title">Before you continue.</h2>' +
-      "<p>As per the guidelines of the Institute of Chartered Accountants of India (ICAI), Chartered Accountants are not permitted to solicit work or advertise. By clicking “I Agree”, you acknowledge that:</p><ul>" +
-      "<li>You are seeking information about " + esc(F.full) + " of your own accord and there has been no advertisement, solicitation or inducement from the firm or its members.</li>" +
-      "<li>The information on this website is for general informational purposes only and does not constitute professional advice.</li>" +
-      "<li>Use of this website does not create a client relationship. The firm is not liable for any action taken on the basis of its content.</li></ul>" +
-      '<div class="btn-row"><button type="button" class="btn btn--primary" data-agree>I Agree</button><a class="btn btn--outline" href="https://www.icai.org" rel="noopener">I Disagree</a></div></div>';
+    modal.innerHTML = '<div class="modal__box"><h2 id="disc-title">Disclaimer</h2>' +
+      "<p>The rules of the Institute of Chartered Accountants of India (ICAI) do not permit chartered accountants to solicit work or advertise. By clicking “I agree”, you acknowledge that:</p><ul>" +
+      "<li>You are seeking information about " + esc(F.full) + " of your own accord.</li>" +
+      "<li>There has been no advertisement, solicitation or inducement by the firm or its members.</li>" +
+      "<li>Information on this website is for general information only and is not professional advice.</li></ul>" +
+      '<div class="modal__actions"><a href="disclaimer.html">Read full disclaimer</a><button type="button" class="btn btn--primary" data-agree>I agree</button></div></div>';
     document.body.appendChild(modal);
     document.body.style.overflow = "hidden";
     var agreeBtn = modal.querySelector("[data-agree]");
@@ -169,6 +167,21 @@ function initWidgets() {
     var cb = document.createElement("script");
     cb.src = "js/chatbot.js";
     document.body.appendChild(cb);
+  }
+
+  /* ---------- Email links ---------- */
+  // Many computers have no mail app set up, so a mailto: link does nothing there.
+  // On computers, open a Gmail "new message" in a new tab instead; phones keep their mail app.
+  if (window.matchMedia && window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+    document.addEventListener("click", function (e) {
+      var a = e.target.closest && e.target.closest('a[href^="mailto:"]');
+      if (!a || e.defaultPrevented || e.ctrlKey || e.metaKey || e.shiftKey) return;
+      var parts = a.getAttribute("href").slice(7).split("?"), q = new URLSearchParams(parts[1] || "");
+      var url = "https://mail.google.com/mail/?view=cm&fs=1&to=" + encodeURIComponent(decodeURIComponent(parts[0])) +
+        (q.get("subject") ? "&su=" + encodeURIComponent(q.get("subject")) : "") + (q.get("body") ? "&body=" + encodeURIComponent(q.get("body")) : "");
+      e.preventDefault();
+      window.open(url, "_blank", "noopener");
+    });
   }
 
   /* ---------- Reveal on scroll ---------- */

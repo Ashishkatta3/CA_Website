@@ -4,12 +4,12 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Contact — MSS Advisory Services, Chartered Accountants</title>
-  <meta name="description" content="Contact MSS Advisory Services, Chartered Accountants — 3rd Lane, Ashok Nagar, Lakshmipuram, Guntur, AP 522002.">
-  <meta name="theme-color" content="#fafafc">
+  <meta name="description" content="Contact MSS Advisory Services, Chartered Accountants — offices in Lakshmipuram, Guntur and Mogalrajpuram, Vijayawada.">
+  <meta name="theme-color" content="#fbf9f4">
   <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;900&family=Playfair+Display:wght@700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body data-page="contact">
@@ -25,13 +25,15 @@
   </section>
 
   <div class="wrap">
-    <div class="contact-grid" style="margin-top:0">
+    <div class="contact-grid">
       <form class="form-card" id="enquiry-form" novalidate>
         <fieldset>
           <legend>Your details</legend>
           <div class="float"><input type="text" id="f-name" name="name" placeholder=" " autocomplete="name" required><label for="f-name">Full name *</label></div>
-          <div class="float"><input type="tel" id="f-phone" name="phone" placeholder=" " autocomplete="tel" required><label for="f-phone">Phone *</label></div>
-          <div class="float"><input type="email" id="f-email" name="email" placeholder=" " autocomplete="email" required><label for="f-email">Email *</label></div>
+          <div class="form-row">
+            <div class="float"><input type="tel" id="f-phone" name="phone" placeholder=" " autocomplete="tel" required><label for="f-phone">Phone *</label></div>
+            <div class="float"><input type="email" id="f-email" name="email" placeholder=" " autocomplete="email" required><label for="f-email">Email *</label></div>
+          </div>
         </fieldset>
         <fieldset>
           <legend>I am a…</legend>
@@ -43,8 +45,8 @@
           <div class="choice-grid" id="needs"></div>
         </fieldset>
         <fieldset>
-          <div class="float"><textarea id="f-msg" name="message" placeholder=" "></textarea><label for="f-msg">Tell us about your requirement</label></div>
-          <p class="hint">A few lines about your situation and any deadlines.</p>
+          <legend>Tell us about your requirement</legend>
+          <div class="float"><textarea id="f-msg" name="message" placeholder=" "></textarea><label for="f-msg">A few lines about your situation and any deadlines.</label></div>
         </fieldset>
         <input class="hp" type="text" name="company_website" tabindex="-1" autocomplete="off" aria-hidden="true">
         <label class="consent"><input type="checkbox" name="consent" id="f-consent" required><span>I agree to be contacted about my enquiry. My information will be kept confidential and handled as described in the <a href="privacy.html">privacy policy</a>.</span></label>
@@ -54,13 +56,13 @@
         </div>
       </form>
 
-      <aside class="contact-side" id="visit" style="scroll-margin-top:80px">
+      <aside class="contact-side" id="visit" style="scroll-margin-top:96px">
         <div class="card">
           <h2>Reach us directly</h2>
           <ul id="direct"></ul>
         </div>
         <div class="card">
-          <h2>Office hours</h2>
+          <h2 id="hours-title">Office hours</h2>
           <dl class="hours" id="hours"></dl>
         </div>
         <div id="maps"></div>
@@ -83,11 +85,12 @@
   $("direct").innerHTML =
     (phones.length ? "<li>" + icon("phone") + "<span>" + phones.map(function (p) { return '<a href="' + p[1] + '">' + p[0] + "</a>"; }).join("<br>") + "</span></li>" : "") +
     "<li>" + icon("mail") + '<a href="mailto:' + F.email + '">' + F.email + "</a></li>" +
-    F.offices.map(function (o) { return "<li>" + icon("pin") + "<span><b>" + o.name + "</b><br>" + esc(o.address) + "</span></li>"; }).join("");
+    F.offices.map(function (o) { return "<li>" + icon("pin") + "<span><b>" + esc(o.name) + "</b><br>" + o.lines.map(esc).join("<br>") + "</span></li>"; }).join("");
+  $("hours-title").insertAdjacentHTML("afterbegin", icon("clock"));
   if (F.hours.length) $("hours").innerHTML = F.hours.map(function (h) { return "<div><dt>" + h[0] + "</dt><dd>" + h[1] + "</dd></div>"; }).join("");
   else $("hours").parentNode.remove();
   $("maps").innerHTML = F.offices.map(function (o) {
-    return '<div class="map"><iframe title="Map: ' + esc(o.name) + '" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://maps.google.com/maps?q=' + encodeURIComponent(o.map) + '&z=15&output=embed"></iframe><p><b>' + o.name + "</b> · " + o.area + "</p></div>";
+    return '<p class="map-label">' + esc(o.name) + '</p><div class="map"><iframe title="Map: ' + esc(o.name) + '" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://maps.google.com/maps?q=' + encodeURIComponent(o.map) + '&z=15&output=embed"></iframe></div>';
   }).join("");
 
   var types = [["individuals", "Individual"], ["smb", "Business Owner"], ["corporates", "Company"], ["startups", "Startup"], ["professionals", "Professional"], ["nonprofits", "Non-Profit"], ["other", "Other"]];

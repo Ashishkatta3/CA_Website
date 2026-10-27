@@ -4,12 +4,12 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Services — MSS Advisory Services, Chartered Accountants</title>
-  <meta name="description" content="Income tax, GST, TDS, accounting, compliance, project reports, CMA data and business advisory from MSS Advisory Services, Guntur.">
-  <meta name="theme-color" content="#fafafc">
+  <meta name="description" content="Income tax, GST, TDS, accounting, compliance, project reports, CMA data and business advisory from MSS Advisory Services, Guntur &amp; Vijayawada.">
+  <meta name="theme-color" content="#fbf9f4">
   <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;900&family=Playfair+Display:wght@700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body data-page="services">
@@ -25,7 +25,7 @@
 
   <section>
     <div class="wrap">
-      <h2 class="font-display" style="font-size:28px;font-weight:600">All services. <span style="color:var(--ink-2)">Pick what you need.</span></h2>
+      <h2 class="h-sm">All services. <span>Pick what you need.</span></h2>
       <ul class="svc-grid mt-8" id="svc-grid"></ul>
       <div class="banner reveal">
         <div><p>Not sure what you need?</p><p class="mt-2 muted">Describe your situation and we'll point you to the right service.</p></div>
@@ -47,7 +47,7 @@
   }).join("");
   document.getElementById("svc-grid").innerHTML = S.services.map(function (s) {
     return '<li class="reveal"><a class="svc-card" href="service.html?s=' + s.id + '">' + S.appIcon(s) + "<h3>" + esc(s.name) + "</h3><p>" + esc(s.summary) +
-      "</p><footer><span>" + s.items.length + " services included</span><span>Learn more ›</span></footer></a></li>";
+      "</p><small>" + s.items.length + ' services included</small><span class="more">Learn more' + S.icon("chevron") + "</span></a></li>";
   }).join("");
 })();
 </script>

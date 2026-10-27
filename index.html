@@ -3,13 +3,13 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>MSS Advisory Services — Chartered Accountants &amp; Business Advisors, Guntur</title>
-  <meta name="description" content="MSS Advisory Services is a firm of Chartered Accountants and business advisory professionals in Guntur providing taxation, GST, TDS, accounting, compliance and business advisory services.">
-  <meta name="theme-color" content="#fafafc">
+  <title>MSS Advisory Services — Chartered Accountants &amp; Business Advisors, Guntur &amp; Vijayawada</title>
+  <meta name="description" content="MSS Advisory Services is a firm of Chartered Accountants and business advisory professionals in Guntur and Vijayawada providing taxation, GST, TDS, accounting, compliance and business advisory services.">
+  <meta name="theme-color" content="#fbf9f4">
   <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;900&family=Playfair+Display:wght@700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body data-page="home">
@@ -20,9 +20,9 @@
   <section class="hero">
     <div class="wrap">
       <div class="reveal">
-        <p class="t-eyebrow">Chartered Accountants &amp; Business Advisory Professionals</p>
-        <h1 class="t-hero">Clarity for every <span class="gradient-text">number.</span></h1>
-        <p class="t-intro">Strategic, reliable and value-driven solutions in taxation, accounting, regulatory compliance and financial management — for businesses, entrepreneurs, professionals and organizations.</p>
+        <p class="t-eyebrow">Chartered Accountants · Business Advisory</p>
+        <h1 class="t-hero">Clarity for every <span class="gradient-text">number</span>.</h1>
+        <p class="t-intro">Strategic, reliable and value-driven solutions in taxation, accounting, compliance and business advisory.</p>
         <div class="btn-row">
           <a class="btn btn--primary" href="contact.html">Request a consultation</a>
           <a class="btn btn--outline" href="services.html">Explore our services</a>
@@ -80,13 +80,13 @@ what you need.</h2>
   <section class="bg-black section">
     <div class="wrap">
       <div class="reveal center">
-        <p class="t-eyebrow mb-2" style="color:#86868b">How it works</p>
+        <p class="t-eyebrow mb-2">How it works</p>
         <h2 class="t-headline pre">From first call
 to ongoing support.</h2>
         <p class="t-intro mx-auto mt-4 max-2xl muted">Here's what happens after you get in touch.</p>
       </div>
       <ol class="steps" id="steps"></ol>
-      <div class="center mt-16"><a class="btn btn--primary" href="contact.html">Start with step one</a></div>
+      <div class="center mt-16"><a class="btn btn--light" href="contact.html">Start with step one</a></div>
     </div>
   </section>
 
@@ -118,9 +118,9 @@ every deadline.</h2>
           <div class="reveal">
             <div class="card card--dark" id="kc-card">
               <h3 class="mt-6">Knowledge Center</h3>
-              <p class="mt-2" style="font-size:15px;color:#a1a1a6">Tax, GST and regulatory updates explained simply.</p>
+              <p class="mt-2" style="font-size:15px;color:var(--muted-dark)">Tax, GST and regulatory updates explained simply.</p>
               <ul class="kc-list mt-4" id="kc-latest"></ul>
-              <a class="more mt-4" href="knowledge.html" style="color:#2997ff;font-size:15px">All updates</a>
+              <a class="more mt-4" href="knowledge.html" style="font-size:15px">Read updates</a>
             </div>
           </div>
         </div>
@@ -153,23 +153,23 @@ every deadline.</h2>
 
   $("hero-meta").innerHTML =
     "<li>" + icon("pin") + F.city + "</li>" +
-    (F.phone ? '<li><a href="' + F.phoneHref + '">' + icon("phone") + F.phone + "</a></li>" : "") +
+    (F.phone ? '<li><a href="' + F.phoneHref + '" title="Call us">' + icon("phone") + F.phone + "</a></li>" : "") +
     '<li><a href="mailto:' + F.email + '">' + icon("mail") + F.email + "</a></li>";
 
-  $("hero-cards").innerHTML = ["income-tax", "gst", "tds"].map(function (id) {
+  $("hero-cards").innerHTML = ["income-tax", "gst", "audit"].map(function (id) {
     var s = S.service(id);
     return '<li><a class="glass" href="service.html?s=' + id + '"><span class="glass__icon">' + icon(s.icon) + "</span><p>" + esc(s.short) + "</p><p>" + esc(s.card) + "</p></a></li>";
   }).join("");
 
   $("trust").innerHTML = '<div class="wrap">' + [
-    ["award", "20+ years of excellence", "Over two decades of professional experience."],
-    ["people", "Experienced professionals", "Chartered Accountants & specialists in tax, GST and advisory."],
+    ["award", "ICAI-registered firm", "Practising chartered accountants, registered with the Institute."],
+    ["people", "Experienced professionals", "Chartered accountants and specialists with over two decades of practice."],
     ["lock", "Confidential & secure", "Your financial information is handled with care."],
     ["chat", "Client-focused", "Clear answers and practical guidance, not jargon."]
   ].map(function (t) { return '<div class="trust__item">' + icon(t[0]) + "<p>" + t[1] + "</p><p>" + t[2] + "</p></div>"; }).join("") + "</div>";
 
   // Big tiles: first two full-width, rest in a 2-column grid
-  var dark = { "income-tax": true, corporate: true };
+  var dark = { "income-tax": true };
   function tile(s, big) {
     var cls = "tile" + (dark[s.id] ? " dark" : (big ? " tile--light" : ""));
     return '<div class="reveal" style="height:100%"><div class="' + cls + '">' +

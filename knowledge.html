@@ -5,11 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Knowledge Center — MSS Advisory Services, Chartered Accountants</title>
   <meta name="description" content="Tax, GST and regulatory updates explained in plain language.">
-  <meta name="theme-color" content="#fafafc">
+  <meta name="theme-color" content="#fbf9f4">
   <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;900&family=Playfair+Display:wght@700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body data-page="resources">
@@ -38,7 +38,7 @@
     root.innerHTML =
       '<article class="bg-white" style="padding:56px 0 80px"><div class="wrap max-3xl">' +
         '<a class="more" href="knowledge.html" style="font-size:15px">‹ Knowledge Center</a>' +
-        '<p class="mt-8"><span class="tag tag--IT">' + CATS[article.cat] + '</span> <span class="muted" style="font-size:14px;margin-left:8px">' + fmt(article.date) + "</span></p>" +
+        '<p class="mt-8"><span class="tag tag--cat">' + CATS[article.cat] + '</span> <span class="muted" style="font-size:14px;margin-left:8px">' + fmt(article.date) + "</span></p>" +
         '<h1 class="t-headline mt-4">' + esc(article.title) + "</h1>" +
         '<p class="t-intro mt-4 muted">' + esc(article.summary) + "</p>" +
         '<div class="prose mt-8">' + article.body + "</div>" +
@@ -52,7 +52,7 @@
   }
 
   function card(a) {
-    return '<li><a class="article-card" href="knowledge.html?a=' + a.id + '"><span class="tag tag--IT">' + CATS[a.cat] + "</span><h3>" + esc(a.title) + "</h3><p>" + esc(a.summary) +
+    return '<li><a class="article-card" href="knowledge.html?a=' + a.id + '"><span class="tag tag--cat">' + CATS[a.cat] + "</span><h3>" + esc(a.title) + "</h3><p>" + esc(a.summary) +
       '</p><footer><span>' + fmt(a.date) + '</span><span class="more">Read' + icon("chevron") + "</span></footer></a></li>";
   }
 

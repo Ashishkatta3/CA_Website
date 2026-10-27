@@ -5,27 +5,27 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Resources — MSS Advisory Services, Chartered Accountants</title>
   <meta name="description" content="Important due dates, tax calculators, updates and official portal links.">
-  <meta name="theme-color" content="#fafafc">
+  <meta name="theme-color" content="#fbf9f4">
   <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;900&family=Playfair+Display:wght@700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body data-page="resources">
 <header id="site-header"></header>
 
 <main>
-  <section class="bg-canvas" style="padding:64px 0 96px">
+  <section class="bg-canvas" style="padding:64px 0 48px">
     <div class="wrap">
       <h1 class="t-hero max-3xl reveal">Resources. <span style="color:var(--ink-2)">Tools and updates to keep you a step ahead.</span></h1>
       <ul class="big-links grid-3 mt-12" id="big-links"></ul>
     </div>
   </section>
 
-  <section id="links" class="bg-white section" style="scroll-margin-top:60px">
+  <section id="links" class="bg-canvas" style="padding:32px 0 96px;scroll-margin-top:60px">
     <div class="wrap reveal">
-      <h2 class="t-headline">Useful links. <span style="color:var(--ink-2)">Official portals in one place.</span></h2>
+      <h2 class="h-sm">Useful links. <span>Official portals in one place.</span></h2>
       <ul class="ext-links" id="ext-links"></ul>
       <p class="mt-8 muted" style="font-size:14px">External websites open in a new tab. We are not responsible for their content.</p>
     </div>
@@ -45,7 +45,7 @@
     ["knowledge.html", "Knowledge Center", "Tax, GST and regulatory updates, explained in plain language.", "news", ["#30d158", "#0a84ff"]]
   ];
   document.getElementById("big-links").innerHTML = cards.map(function (c) {
-    return '<li class="reveal"><a href="' + c[0] + '">' + S.appIcon({ icon: c[3], grad: c[4] }) + "<h2>" + c[1] + "</h2><p>" + c[2] + '</p><span class="more">Open' + icon("chevron") + "</span></a></li>";
+    return '<li class="reveal"><a href="' + c[0] + '">' + icon(c[3], "lg") + "<h2>" + c[1] + "</h2><p>" + c[2] + '</p><span class="more">Open' + icon("chevron") + "</span></a></li>";
   }).join("");
   var links = [
     ["Income Tax e-Filing", "https://www.incometax.gov.in"], ["GST Portal", "https://www.gst.gov.in"],
@@ -54,7 +54,7 @@
     ["Udyam Registration", "https://udyamregistration.gov.in"], ["ICAI", "https://www.icai.org"]
   ];
   document.getElementById("ext-links").innerHTML = links.map(function (l) {
-    return '<li><a href="' + l[1] + '" target="_blank" rel="noopener">' + l[0] + '<span aria-hidden="true">↗</span></a></li>';
+    return '<li><a href="' + l[1] + '" target="_blank" rel="noopener">' + icon("link") + "<span>" + l[0] + "</span>" + icon("arrowUpRight") + "</a></li>";
   }).join("");
 })();
 </script>
