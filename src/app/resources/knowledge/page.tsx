@@ -47,7 +47,7 @@ export default async function KnowledgePage(props: PageProps<"/resources/knowled
           <ul className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
             {shown.map((a) => (
               <li key={a.slug}>
-                <Link href={a.href ?? "#"} className="flex h-full flex-col rounded-[22px] bg-white p-7 transition-shadow hover:shadow-lg">
+                <Link href={`/resources/knowledge/${a.slug}`} className="flex h-full flex-col rounded-[22px] bg-white p-7 transition-shadow hover:shadow-lg">
                   <span className="text-[12px] font-semibold tracking-wide text-ink-2 uppercase">{categories.find((x) => x.id === a.category)?.label}</span>
                   <h2 className="mt-3 font-display text-[21px] leading-snug font-semibold">{a.title}</h2>
                   <p className="mt-2 flex-1 text-[15px] text-ink-2">{a.excerpt}</p>

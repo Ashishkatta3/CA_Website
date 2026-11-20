@@ -60,7 +60,7 @@ export default function AboutPage() {
       <section id="team" className="scroll-mt-14 bg-canvas py-24">
         <Container>
           <Reveal>
-            <h2 className="type-headline text-center">Leadership Associates.</h2>
+            <h2 className="type-headline text-center">Leadership &amp; Associates.</h2>
           </Reveal>
           <Reveal>
             <div className="mx-auto mt-14 max-w-[438px]">
