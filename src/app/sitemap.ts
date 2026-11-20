@@ -1,8 +1,12 @@
 import type { MetadataRoute } from "next";
+import { articles } from "@/content/articles";
 import { services } from "@/content/services";
 
-// Set NEXT_PUBLIC_SITE_URL to the production domain.
-const base = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.example.com";
+// NEXT_PUBLIC_SITE_URL overrides (set it once a custom domain is live);
+// otherwise Vercel's production URL is used.
+const base =
+  process.env.NEXT_PUBLIC_SITE_URL ??
+  (process.env.VERCEL_PROJECT_PRODUCTION_URL ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` : "http://localhost:3000");
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const paths = [
@@ -15,6 +19,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/resources/important-dates",
     "/resources/calculators",
     "/resources/knowledge",
+    ...articles.map((a) => `/resources/knowledge/${a.slug}`),
     "/careers",
     "/contact",
     "/legal/privacy",

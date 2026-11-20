@@ -57,7 +57,11 @@ export function Footer() {
               {legalLinks.map((l, i) => (
                 <li key={l.href} className="flex items-center">
                   {i > 0 && <span className="mx-2 text-line">|</span>}
-                  <Link href={l.href} className="hover:text-ink hover:underline">{l.label}</Link>
+                  {l.href.endsWith(".xml") ? (
+                    <a href={l.href} className="hover:text-ink hover:underline">{l.label}</a>
+                  ) : (
+                    <Link href={l.href} className="hover:text-ink hover:underline">{l.label}</Link>
+                  )}
                 </li>
               ))}
             </ul>

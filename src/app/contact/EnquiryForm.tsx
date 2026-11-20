@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useActionState } from "react";
 import { Icon } from "@/components/Icon";
 import { submitEnquiry, type EnquiryState } from "./actions";
@@ -111,7 +112,8 @@ export function EnquiryForm({ defaultNeed, defaultClientType }: { defaultNeed?: 
       <div>
         <label className="flex items-start gap-3 text-[14px] text-ink-2">
           <input type="checkbox" name="consent" defaultChecked={v?.consent} className="mt-0.5 size-[18px] shrink-0 accent-accent" />
-          I agree to be contacted about my enquiry. My information will be kept confidential and handled as described in the privacy policy.
+          I agree to be contacted about my enquiry. My information will be kept confidential and handled as described in the{" "}
+          <Link href="/legal/privacy" className="text-accent underline underline-offset-2">privacy policy</Link>.
         </label>
         {state.errors?.consent && <p className="mt-1.5 text-[13px] text-[#e30000]">{state.errors.consent}</p>}
       </div>
