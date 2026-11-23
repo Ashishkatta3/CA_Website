@@ -212,5 +212,4 @@ export const legalLinks: NavLink[] = [
   { label: "Privacy Policy", href: "/legal/privacy" },
   { label: "Terms of Use", href: "/legal/terms" },
   { label: "Disclaimer", href: "/legal/disclaimer" },
-  { label: "Sitemap", href: "/sitemap.xml" },
 ];

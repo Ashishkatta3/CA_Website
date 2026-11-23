@@ -1,5 +1,7 @@
 "use server";
 
+import { firm } from "@/content/site";
+
 export type EnquiryState = {
   status: "idle" | "success" | "error";
   message?: string;
@@ -36,9 +38,60 @@ export async function submitEnquiry(_prev: EnquiryState, formData: FormData): Pr
 
   const enquiry = { name, phone, email, clientType, needs, message, receivedAt: new Date().toISOString() };
 
-  // Delivery: connect this to email (e.g. Resend/SES), a CRM, or the future
-  // /portal database. Until then enquiries are only written to the server log.
+  // Always logged, so nothing is lost if email delivery fails.
   console.info("[enquiry]", JSON.stringify(enquiry));
 
+  if (!(await sendEnquiryEmail(enquiry))) {
+    return {
+      status: "error",
+      message: `Sorry, we couldn't send your enquiry. Please call us on ${firm.phone} or email ${firm.email}.`,
+      values: { name, phone, email, clientType, needs, message, consent: true },
+    };
+  }
+
   return { status: "success" };
+}
+
+type Enquiry = { name: string; phone: string; email: string; clientType: string; needs: string[]; message: string; receivedAt: string };
+
+// Sends via Resend (https://resend.com). Set in Vercel:
+//   RESEND_API_KEY — required; without it enquiries are only logged
+//   ENQUIRY_TO     — recipient(s), comma-separated (defaults to the firm email)
+//   ENQUIRY_FROM   — sender on a verified domain (defaults to Resend's test
+//                    sender, which can only deliver to the Resend account's own email)
+async function sendEnquiryEmail(e: Enquiry): Promise<boolean> {
+  const key = process.env.RESEND_API_KEY;
+  if (!key) return true;
+
+  const to = (process.env.ENQUIRY_TO ?? firm.email).split(",").map((s) => s.trim()).filter(Boolean);
+  const text = [
+    `Name: ${e.name}`,
+    `Phone: ${e.phone}`,
+    `Email: ${e.email}`,
+    `Client type: ${e.clientType || "—"}`,
+    `Needs: ${e.needs.join(", ") || "—"}`,
+    "",
+    e.message || "(no message)",
+    "",
+    `Received ${e.receivedAt}`,
+  ].join("\n");
+
+  try {
+    const res = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: { Authorization: `Bearer ${key}`, "Content-Type": "application/json" },
+      body: JSON.stringify({
+        from: process.env.ENQUIRY_FROM ?? `${firm.name} Website <onboarding@resend.dev>`,
+        to,
+        reply_to: e.email,
+        subject: `New enquiry from ${e.name}`,
+        text,
+      }),
+    });
+    if (!res.ok) console.error("[enquiry] email failed", res.status, await res.text());
+    return res.ok;
+  } catch (err) {
+    console.error("[enquiry] email failed", err);
+    return false;
+  }
 }
