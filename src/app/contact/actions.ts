@@ -1,10 +1,13 @@
 "use server";
 
 import { firm } from "@/content/site";
+import { clientTypes, needOptions } from "./options";
 
 export type EnquiryState = {
-  status: "idle" | "success" | "error";
+  status: "idle" | "success" | "error" | "mailto";
   message?: string;
+  // Set when email delivery isn't configured: the browser opens this pre-filled draft instead.
+  mailto?: string;
   errors?: Partial<Record<"name" | "phone" | "email" | "consent", string>>;
   // Echoed back on error, because React resets the form after an action runs.
   values?: { name: string; phone: string; email: string; clientType: string; needs: string[]; message: string; consent: boolean };
@@ -41,7 +44,9 @@ export async function submitEnquiry(_prev: EnquiryState, formData: FormData): Pr
   // Always logged, so nothing is lost if email delivery fails.
   console.info("[enquiry]", JSON.stringify(enquiry));
 
-  if (!(await sendEnquiryEmail(enquiry))) {
+  const result = await sendEnquiryEmail(enquiry);
+  if (result === "not-configured") return { status: "mailto", mailto: buildMailto(enquiry) };
+  if (result === "failed") {
     return {
       status: "error",
       message: `Sorry, we couldn't send your enquiry. Please call us on ${firm.phone} or email ${firm.email}.`,
@@ -59,22 +64,14 @@ type Enquiry = { name: string; phone: string; email: string; clientType: string;
 //   ENQUIRY_TO     — recipient(s), comma-separated (defaults to the firm email)
 //   ENQUIRY_FROM   — sender on a verified domain (defaults to Resend's test
 //                    sender, which can only deliver to the Resend account's own email)
-async function sendEnquiryEmail(e: Enquiry): Promise<boolean> {
+//   Without RESEND_API_KEY the visitor's own email app opens with the enquiry
+//   pre-filled to firm.email (mailto), so enquiries still reach the firm.
+async function sendEnquiryEmail(e: Enquiry): Promise<"sent" | "failed" | "not-configured"> {
   const key = process.env.RESEND_API_KEY;
-  if (!key) return true;
+  if (!key) return "not-configured";
 
   const to = (process.env.ENQUIRY_TO ?? firm.email).split(",").map((s) => s.trim()).filter(Boolean);
-  const text = [
-    `Name: ${e.name}`,
-    `Phone: ${e.phone}`,
-    `Email: ${e.email}`,
-    `Client type: ${e.clientType || "—"}`,
-    `Needs: ${e.needs.join(", ") || "—"}`,
-    "",
-    e.message || "(no message)",
-    "",
-    `Received ${e.receivedAt}`,
-  ].join("\n");
+  const text = [enquiryText(e), "", `Received ${e.receivedAt}`].join("\n");
 
   try {
     const res = await fetch("https://api.resend.com/emails", {
@@ -89,9 +86,31 @@ async function sendEnquiryEmail(e: Enquiry): Promise<boolean> {
       }),
     });
     if (!res.ok) console.error("[enquiry] email failed", res.status, await res.text());
-    return res.ok;
+    return res.ok ? "sent" : "failed";
   } catch (err) {
     console.error("[enquiry] email failed", err);
-    return false;
+    return "failed";
   }
+}
+
+const label = (list: { id: string; label: string }[], id: string) => list.find((o) => o.id === id)?.label ?? id;
+
+function enquiryText(e: Enquiry, maxMessage = Infinity) {
+  const msg = e.message.length > maxMessage ? `${e.message.slice(0, maxMessage)}…` : e.message;
+  return [
+    `Name: ${e.name}`,
+    `Phone: ${e.phone}`,
+    `Email: ${e.email}`,
+    `Client type: ${e.clientType ? label(clientTypes, e.clientType) : "—"}`,
+    `Needs: ${e.needs.map((n) => label(needOptions, n)).join(", ") || "—"}`,
+    "",
+    msg || "(no message)",
+  ].join("\n");
+}
+
+// Some mail apps truncate very long mailto links, so the message is capped.
+function buildMailto(e: Enquiry) {
+  const subject = encodeURIComponent(`Website enquiry from ${e.name}`);
+  const body = encodeURIComponent(enquiryText(e, 1200)).replace(/%0A/g, "%0D%0A");
+  return `mailto:${firm.email}?subject=${subject}&body=${body}`;
 }

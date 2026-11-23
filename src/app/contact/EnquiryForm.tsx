@@ -1,8 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { useActionState } from "react";
+import { useActionState, useEffect } from "react";
 import { Icon } from "@/components/Icon";
+import { firm } from "@/content/site";
 import { submitEnquiry, type EnquiryState } from "./actions";
 import { clientTypes, needOptions } from "./options";
 
@@ -50,6 +51,36 @@ const initial: EnquiryState = { status: "idle" };
 export function EnquiryForm({ defaultNeed, defaultClientType }: { defaultNeed?: string; defaultClientType?: string }) {
   const [state, action, pending] = useActionState(submitEnquiry, initial);
   const v = state.values;
+
+  // Email delivery isn't configured: open the visitor's mail app with the enquiry pre-filled.
+  useEffect(() => {
+    if (state.status === "mailto" && state.mailto) window.location.href = state.mailto;
+  }, [state]);
+
+  if (state.status === "mailto" && state.mailto) {
+    return (
+      <div className="animate-[fadeUp_.6s_var(--ease-apple)] rounded-[28px] bg-white p-10 text-center sm:p-14" role="status">
+        <span className="mx-auto grid size-16 place-items-center rounded-full bg-accent/10 text-accent">
+          <Icon name="mail" className="size-8" strokeWidth={2} />
+        </span>
+        <h2 className="mt-6 font-display text-[28px] font-semibold">One last step.</h2>
+        <p className="mx-auto mt-2 max-w-md text-ink-2">
+          Your email app should have opened with your enquiry filled in. Please press <strong>Send</strong> there so it reaches us.
+        </p>
+        <a
+          href={state.mailto}
+          className="mt-8 inline-block rounded-full bg-accent px-10 py-3 text-[17px] text-white transition-colors hover:bg-accent-hover"
+        >
+          Open email again
+        </a>
+        <p className="mx-auto mt-6 max-w-md text-[14px] text-ink-2">
+          Didn&apos;t open? Email us at{" "}
+          <a href={`mailto:${firm.email}`} className="text-accent underline underline-offset-2">{firm.email}</a>{" "}
+          or call <a href={firm.phoneHref} className="text-accent underline underline-offset-2">{firm.phone}</a>.
+        </p>
+      </div>
+    );
+  }
 
   if (state.status === "success") {
     return (
