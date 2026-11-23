@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { firm, footerColumns, legalLinks } from "@/content/site";
-import { LogoMark, Wordmark } from "./Brand";
+import { BrandLogo } from "./Brand";
 
 export function Footer() {
   return (
@@ -17,9 +17,8 @@ export function Footer() {
           </p>
         </div>
 
-        <div className="flex items-center gap-3 pt-6">
-          <LogoMark className="size-12" />
-          <Wordmark caption className="text-[22px]" />
+        <div className="pt-6">
+          <BrandLogo className="h-[72px]" />
         </div>
 
         <nav aria-label="Footer" className="grid grid-cols-2 gap-x-6 gap-y-6 py-5 sm:grid-cols-3 lg:grid-cols-5">

@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { firm, nav, type NavItem } from "@/content/site";
-import { LogoMark, Wordmark } from "./Brand";
+import { BrandLogo } from "./Brand";
 import { Chevron } from "./ui";
 
 const glass = "bg-nav/86 backdrop-blur-[20px] backdrop-saturate-[1.8]";
@@ -11,8 +11,7 @@ const glass = "bg-nav/86 backdrop-blur-[20px] backdrop-saturate-[1.8]";
 export function Logo({ className = "" }: { className?: string }) {
   return (
     <Link href="/" aria-label={`${firm.name} — Home`} className={`flex shrink-0 items-center gap-2 ${className}`}>
-      <LogoMark className="size-[30px]" detail="compact" />
-      <Wordmark className="text-[17px]" />
+      <BrandLogo variant="compact" priority className="h-[34px]" />
     </Link>
   );
 }
