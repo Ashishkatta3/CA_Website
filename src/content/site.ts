@@ -29,8 +29,8 @@ export const firm = {
   ],
   phone: "+91 99593 96789",
   phoneHref: "tel:+919959396789",
-  email: "ashishkatta98@gmail.com", // TEMPORARY for testing — restore info@mssadvisoryservices.com before launch
-  careersEmail: "ashishkatta98@gmail.com", // TEMPORARY, as above
+  email: "info@mssadvisoryservices.com",
+  careersEmail: "info@mssadvisoryservices.com",
   hours: [
     { days: "Monday – Friday", time: "9:30 AM – 6:30 PM" },
     { days: "Saturday", time: "10:00 AM – 2:00 PM" },
