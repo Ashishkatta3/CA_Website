@@ -48,7 +48,6 @@
   --color-svc-registrations-b: #d98a1f;
 
   --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", var(--font-inter), "Helvetica Neue", Helvetica, Arial, sans-serif;
-  --font-brand: var(--font-archivo), "Helvetica Neue", Arial, sans-serif;
   --font-display: -apple-system, BlinkMacSystemFont, "SF Pro Display", var(--font-inter), "Helvetica Neue", Helvetica, Arial, sans-serif;
 
   --ease-apple: cubic-bezier(0.28, 0.11, 0.32, 1);
