@@ -32,8 +32,7 @@ export const firm = {
   email: "info@mssadvisoryservices.com",
   careersEmail: "info@mssadvisoryservices.com",
   hours: [
-    { days: "Monday – Friday", time: "9:30 AM – 6:30 PM" },
-    { days: "Saturday", time: "10:00 AM – 2:00 PM" },
+    { days: "Monday – Saturday", time: "9:00 AM – 5:00 PM" },
     { days: "Sunday", time: "Closed" },
   ],
   founded: null as number | null, // e.g. 2010 — leave null to hide
