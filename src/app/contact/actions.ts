@@ -1,7 +1,7 @@
 "use server";
 
 import { firm } from "@/content/site";
-import { clientTypes, needOptions } from "./options";
+import { enquiryHtml, enquirySubject, enquiryText, type Enquiry } from "./email";
 
 export type EnquiryState = {
   status: "idle" | "success" | "error" | "mailto";
@@ -57,8 +57,6 @@ export async function submitEnquiry(_prev: EnquiryState, formData: FormData): Pr
   return { status: "success" };
 }
 
-type Enquiry = { name: string; phone: string; email: string; clientType: string; needs: string[]; message: string; receivedAt: string };
-
 // Sends via Resend (https://resend.com). Set in Vercel:
 //   RESEND_API_KEY — required; without it enquiries are only logged
 //   ENQUIRY_TO     — recipient(s), comma-separated (defaults to the firm email)
@@ -71,7 +69,6 @@ async function sendEnquiryEmail(e: Enquiry): Promise<"sent" | "failed" | "not-co
   if (!key) return "not-configured";
 
   const to = (process.env.ENQUIRY_TO ?? firm.email).split(",").map((s) => s.trim()).filter(Boolean);
-  const text = [enquiryText(e), "", `Received ${e.receivedAt}`].join("\n");
 
   try {
     const res = await fetch("https://api.resend.com/emails", {
@@ -81,8 +78,9 @@ async function sendEnquiryEmail(e: Enquiry): Promise<"sent" | "failed" | "not-co
         from: process.env.ENQUIRY_FROM ?? `${firm.name} Website <onboarding@resend.dev>`,
         to,
         reply_to: e.email,
-        subject: `New enquiry from ${e.name}`,
-        text,
+        subject: enquirySubject(e),
+        html: enquiryHtml(e),
+        text: enquiryText(e),
       }),
     });
     if (!res.ok) console.error("[enquiry] email failed", res.status, await res.text());
@@ -93,24 +91,9 @@ async function sendEnquiryEmail(e: Enquiry): Promise<"sent" | "failed" | "not-co
   }
 }
 
-const label = (list: { id: string; label: string }[], id: string) => list.find((o) => o.id === id)?.label ?? id;
-
-function enquiryText(e: Enquiry, maxMessage = Infinity) {
-  const msg = e.message.length > maxMessage ? `${e.message.slice(0, maxMessage)}…` : e.message;
-  return [
-    `Name: ${e.name}`,
-    `Phone: ${e.phone}`,
-    `Email: ${e.email}`,
-    `Client type: ${e.clientType ? label(clientTypes, e.clientType) : "—"}`,
-    `Needs: ${e.needs.map((n) => label(needOptions, n)).join(", ") || "—"}`,
-    "",
-    msg || "(no message)",
-  ].join("\n");
-}
-
 // Some mail apps truncate very long mailto links, so the message is capped.
 function buildMailto(e: Enquiry) {
-  const subject = encodeURIComponent(`Website enquiry from ${e.name}`);
+  const subject = encodeURIComponent(enquirySubject(e));
   const body = encodeURIComponent(enquiryText(e, 1200)).replace(/%0A/g, "%0D%0A");
   return `mailto:${firm.email}?subject=${subject}&body=${body}`;
 }
